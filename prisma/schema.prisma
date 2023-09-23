@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Error {
+  id       String @id @default(uuid())
+  unit     String
+  rotina   String
+  modulo   String
+  filial   String
+  conteudo String
+
+  @@map("errors")
+}
+
+model PageView {
+  id     String @id @default(uuid())
+  rotina String
+  modulo String
+  filial String
+
+  @@map("pagesView")
+}
