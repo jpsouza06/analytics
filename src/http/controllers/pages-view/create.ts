@@ -11,7 +11,7 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
    })
 
    const {rotina, modulo, filial} = createPagesViewSchema.parse(request.body)
-   
+
 	const pageView = await prisma.pageView.create({
       data: {
          id: randomUUID(),

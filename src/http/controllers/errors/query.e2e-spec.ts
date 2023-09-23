@@ -2,7 +2,7 @@ import request from 'supertest'
 import {app} from '@/app'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-describe('Find Pages View', () => {
+describe('Find Errors', () => {
 	beforeAll(async () => {
 		await app.ready()
 	})
@@ -11,21 +11,25 @@ describe('Find Pages View', () => {
 		await app.close()   
 	})
    
-	it('should be able to find a page view by query', async () => {
-      const pageView = await request(app.server)
-			.post('/page-view')
+	it('should be able to find a error by query', async () => {
+      await request(app.server)
+			.post('/error')
 			.send({
+				unit: 'Unit 1',
 				rotina: 'Rotina 2',
 				modulo: 'Modulo 2', 
-				filial: 'Filial', 
+				filial: 'Filial',
+				conteudo: 'Conteudo' 
 			})
 
 		const response = await request(app.server)
-			.post('/page-view/query')
+			.post('/error/query')
 			.send({
-            filial: 'Filial',
+				unit: 'Unit 1',
+				rotina: 'Rotina 2',
+				modulo: 'Modulo 2', 
          })
-      console.log(response.body.pagesView)
+
 		expect(response.statusCode).toEqual(200)
 	})
 })

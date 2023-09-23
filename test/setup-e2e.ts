@@ -20,10 +20,11 @@ const schemaId = randomUUID()
 
 beforeAll(async () => {
    const databaseURL = generateUniqueDatabaseURL(schemaId)
-	console.log(databaseURL)
-   process.env.DATABASE_URL = databaseURL
 
+   process.env.DATABASE_URL = databaseURL
+	
    execSync('npx prisma migrate deploy')
+	prisma.$connect()
 })
 
 afterAll(async () => {
