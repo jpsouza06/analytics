@@ -8,21 +8,21 @@ datasource db {
 }
 
 model Error {
-  id       String @id @default(uuid())
-  unit     String
-  rotina   String
-  modulo   String
-  filial   String
-  conteudo String
+  id        String   @id @default(uuid())
+  unit      String
+  rotina    String
+  modulo    String
+  conteudo  String
+  createdAt DateTime @default(now())
 
   @@map("errors")
 }
 
 model PageView {
-  id     String @id @default(uuid())
-  rotina String
-  modulo String
-  filial String
+  id        String   @id @default(uuid())
+  rotina    String
+  modulo    String
+  createdAt DateTime @default(now())
 
-  @@map("pagesView")
+  @@map("pageViews")
 }

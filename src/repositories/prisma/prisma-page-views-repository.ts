@@ -1,0 +1,47 @@
+import { PageViewQuery } from "@/interface/page-view-query-interface";
+import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
+import { PageViewsRepository } from "../page-views-repository";
+
+export class PrismaErrorsRepository implements PageViewsRepository {
+   async findManyByQuery(query: PageViewQuery, page: number)  {
+      const pageViews = await prisma.error.findMany({
+         where: {
+            ...(query.rotina && { rotina: { contains: query.rotina } }),
+            ...(query.modulo && { modulo: { contains: query.modulo} }),
+            ...(query.dataInicio && 
+               { 
+                  data: {
+                     lte: new Date(query.dataInicio),
+                     get: 
+                        (
+                           query.dataFim ? 
+                           new Date(query.dataFim) : 
+                           new Date()
+                        )
+                  } 
+               }),
+         },
+         take: 20,
+         skip: (page - 1) * 20,
+      })
+
+      return pageViews
+   }
+   async findById(id: string) {
+      const pageView = await prisma.pageView.findUnique({
+         where: {
+            id,
+         }
+      })
+
+      return pageView
+   }
+   async create(data: Prisma.PageViewUncheckedCreateInput) {
+      const pageView = await prisma.pageView.create({
+         data,
+      })
+
+      return pageView
+   }
+}

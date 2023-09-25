@@ -13,13 +13,11 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
 
    const {unit, rotina, modulo, filial, conteudo} = getBodySchema.parse(request.body)
    
-	const errors = await prisma.error.findMany({
+	const pagesView = await prisma.pageView.findMany({
       where: {
-         ...(unit && { unit: { contains: unit } }),
          ...(rotina && { rotina: { contains: rotina } }),
          ...(modulo && { modulo: { contains: modulo} }),
          ...(filial && { filial: { contains: filial } }),
-         ...(conteudo && { conteudo: { contains: conteudo } })
       }
 	})
    
