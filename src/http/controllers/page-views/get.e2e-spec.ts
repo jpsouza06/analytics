@@ -19,7 +19,6 @@ describe('Get Page View', () => {
             id: randomUUID(),
             rotina: 'Rotina',
             modulo: 'Modulo',
-            filial: 'Filial'
          }
       }) 
 

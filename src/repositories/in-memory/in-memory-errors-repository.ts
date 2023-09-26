@@ -6,23 +6,35 @@ import { ErrorsRepository } from "../errors-repository";
 export class InMemoryErrorsRepository implements ErrorsRepository {
    public items: Error[] = []
    async findManyByQuery(query: ErrorQuery, page: number) {
-      console.log(query)
-      return this.items
-         .filter(item => {
-            {query.unit && item.unit === query.unit}
-            {query.rotina && item.rotina === query.rotina}
-            {query.modulo && item.modulo === query.modulo}
-            {query.conteudo && item.conteudo === query.conteudo}
-            {query.dataInicio && 
-               item.createdAt >= new Date(query.dataInicio)
-            }
-            {
-               query.dataFim ? 
-               item.createdAt <= new Date(query.dataFim) : 
-               item.createdAt <= new Date()
-            }
-         })
-         .slice((page - 1) * 20, page * 20)
+      let itemsQuery: Error[] = []
+
+      query.unit && (
+         itemsQuery = this.items.filter(item => item.unit === query.unit)
+      ) 
+
+      query.rotina && (
+         itemsQuery = this.items.filter(item => item.rotina === query.rotina)
+      ) 
+
+      query.modulo && (
+         itemsQuery = this.items.filter(item => item.modulo === query.modulo)
+      ) 
+
+      query.conteudo && (
+         itemsQuery = this.items.filter(item => item.conteudo === query.conteudo)
+      ) 
+
+      itemsQuery = this.items.filter(
+         item => item.createdAt >= new Date(query.dataInicio)
+      )
+
+      itemsQuery = this.items.filter(
+         item => query.dataFim ?
+            item.createdAt <= new Date(query.dataFim) :
+            item.createdAt <= new Date()
+      )
+
+      return itemsQuery.slice((page - 1) * 20, page * 20)
    }
    async findById(id: string) {
       const error = this.items.find(item => item.id === id)
@@ -40,7 +52,7 @@ export class InMemoryErrorsRepository implements ErrorsRepository {
          rotina: data.rotina,
          modulo: data.modulo,
          conteudo: data.conteudo,
-         createdAt: new Date(),
+         createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
       }
 
       this.items.push(error)

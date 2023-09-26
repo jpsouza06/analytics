@@ -1,25 +1,22 @@
-import { prisma } from "@/lib/prisma";
-import { randomUUID } from "node:crypto";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
+import { makeCreatePageViewUseCase } from "@/use-cases/factories/make-create-page-view-use-case";
 
 export async function Create(request: FastifyRequest, reply: FastifyReply) {
    const createPagesViewSchema = z.object({
       rotina: z.string(),
       modulo: z.string(),
-      filial: z.string()
    })
 
-   const {rotina, modulo, filial} = createPagesViewSchema.parse(request.body)
+   const {rotina, modulo} = createPagesViewSchema.parse(request.body)
 
-	const pageView = await prisma.pageView.create({
-      data: {
-         id: randomUUID(),
-         rotina,
-         modulo,
-         filial 
-      }
+   const createUseCase = makeCreatePageViewUseCase()
+
+	const {pageView} = await createUseCase.execute({
+      rotina,
+      modulo,
 	})
+
 
    return reply.status(201).send({
       pageView,

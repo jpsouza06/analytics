@@ -6,5 +6,5 @@ import { Query } from "./query";
 export async function errorRoutes(app: FastifyInstance) {
    app.post('/error', Create)
    app.get('/error/:errorId', Get)
-   app.post('/error/query', Query)
+   app.post('/error/query/:page', Query)
 }

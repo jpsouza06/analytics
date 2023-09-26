@@ -1,29 +1,43 @@
 import { prisma } from "@/lib/prisma";
+import { makeFindPageViewByQueryUseCase } from "@/use-cases/factories/make-find-page-view-by-query-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function Query(request: FastifyRequest, reply: FastifyReply) {
-   const getBodySchema = z.object({
+   const queryPageViewBodySchema = z.object({
       rotina: z.string().optional(),
       modulo: z.string().optional(),
-      filial: z.string().optional()
+      dataInicio: z.string(),
+      dataFim: z.string().optional(),
 	})
 
-   const {rotina, modulo, filial} = getBodySchema.parse(request.body)
+   const queryPageViewParamsSchema = z.object({
+      page: z.coerce.number().min(1).default(1)
+   })
+   console.log(request.body)
+   const {rotina, modulo, dataInicio, dataFim} = queryPageViewBodySchema.parse(request.body)
    
-	const pagesView = await prisma.pageView.findMany({
-      where: {
-         ...(rotina && { rotina: { contains: rotina } }),
-         ...(modulo && { modulo: { contains: modulo} }),
-         ...(filial && { filial: { contains: filial } }),
-      }
-	})
+   const {page} = queryPageViewParamsSchema.parse(request.params)
+
+	const findPageViewByQueryUseCase = makeFindPageViewByQueryUseCase()
    
-   if (!pagesView || pagesView.length === 0) {
+   const query = {
+      rotina,
+      modulo,
+      dataInicio,
+      dataFim
+   }
+   
+   const {pageViews} = await findPageViewByQueryUseCase.execute({
+      query,
+      page
+   })
+   
+   if (!pageViews || pageViews.length === 0) {
       return reply.status(400).send()
    }
 
    return reply.status(200).send({
-      pagesView,
+      pageViews,
    })
 }

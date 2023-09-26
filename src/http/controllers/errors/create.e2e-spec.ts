@@ -18,7 +18,6 @@ describe('Create Error', () => {
 				unit: 'Unit',
 				rotina: 'Teste',
 				modulo: 'Teste', 
-				filial: 'Teste',
 				conteudo: 'Conteudo' 
 			})
 

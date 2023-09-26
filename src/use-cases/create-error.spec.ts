@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { InMemoryErrorsRepository } from '@/repositories/in-memory/in-memory-errors-repository'
 import { CreateErrorUseCase } from './create-error'
 

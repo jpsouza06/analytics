@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { makeGetPageViewUseCase } from "@/use-cases/factories/make-get-page-view-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -9,11 +9,11 @@ export async function Get(request: FastifyRequest, reply: FastifyReply) {
 
    const {pageViewId} = getParamsSchema.parse(request.params)
    
-	const pageView = await prisma.pageView.findFirst({
-      where: {
-         id: pageViewId
-      }
-	})
+	const getPageViewUseCase = makeGetPageViewUseCase()
+
+   const {pageView} = await getPageViewUseCase.execute({
+      pageViewId,
+   })
 
    if (!pageView) {
       return reply.status(400).send()

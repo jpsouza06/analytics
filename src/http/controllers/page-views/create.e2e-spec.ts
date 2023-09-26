@@ -17,7 +17,6 @@ describe('Create Page View', () => {
 			.send({
 				rotina: 'Teste',
 				modulo: 'Teste', 
-				filial: 'Teste', 
 			})
       
 		expect(response.statusCode).toEqual(201)

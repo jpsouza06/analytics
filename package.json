@@ -8,7 +8,7 @@
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
     "test:e2e": "vitest run --config ./vite.config.e2e.ts",
-    "test:e2e:watch": "vitest run --config ./vite.config.e2e.ts",
+    "test:e2e:watch": "vitest --config ./vite.config.e2e.ts",
     "test": "vitest run --dir src/use-cases",
     "test:watch": "vitest --dir src/use-cases",
     "test:coverage": "vitest run --coverage",

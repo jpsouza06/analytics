@@ -5,6 +5,7 @@ import { ErrorsRepository } from "../errors-repository";
 
 export class PrismaErrorsRepository implements ErrorsRepository {
    async findManyByQuery(query: ErrorQuery, page: number)  {
+      
       const errors = await prisma.error.findMany({
          where: {
             ...(query.unit && { unit: { contains: query.unit } }),
@@ -13,9 +14,9 @@ export class PrismaErrorsRepository implements ErrorsRepository {
             ...(query.conteudo && { conteudo: { contains: query.conteudo} }),
             ...(query.dataInicio && 
                { 
-                  data: {
-                     lte: new Date(query.dataInicio),
-                     get: 
+                  createdAt: {
+                     gte: new Date(query.dataInicio),
+                     lte: 
                         (
                            query.dataFim ? 
                            new Date(query.dataFim) : 
@@ -27,7 +28,7 @@ export class PrismaErrorsRepository implements ErrorsRepository {
          take: 20,
          skip: (page - 1) * 20,
       })
-
+      
       return errors
    }
    async findById(id: string) {

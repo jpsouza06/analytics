@@ -1,6 +1,5 @@
 import { ErrorsRepository } from "@/repositories/errors-repository";
 import { Error } from "@prisma/client";
-import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 interface CreateErrorUseCaseRequest {
    unit: string;
