@@ -1,17 +1,17 @@
-import { makeGetPageViewUseCase } from "@/use-cases/factories/make-get-page-view-use-case";
+import { makeGetPageViewUseCase } from "@/use-cases/factories/page-view/make-get-page-view-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function Get(request: FastifyRequest, reply: FastifyReply) {
    const getParamsSchema = z.object({
-		pageViewId: z.string().uuid()
-	})
+      pageViewId: z.string().uuid()
+   })
 
-   const {pageViewId} = getParamsSchema.parse(request.params)
-   
-	const getPageViewUseCase = makeGetPageViewUseCase()
+   const { pageViewId } = getParamsSchema.parse(request.params)
 
-   const {pageView} = await getPageViewUseCase.execute({
+   const getPageViewUseCase = makeGetPageViewUseCase()
+
+   const { pageView } = await getPageViewUseCase.execute({
       pageViewId,
    })
 

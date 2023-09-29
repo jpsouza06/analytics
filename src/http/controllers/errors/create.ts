@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { makeCreateErrorUseCase } from "@/use-cases/factories/make-create-error-use-case";
+import { makeCreateErrorUseCase } from "@/use-cases/factories/error/make-create-error-use-case";
 
 export async function Create(request: FastifyRequest, reply: FastifyReply) {
    const createErrorBodySchema = z.object({
@@ -10,16 +10,16 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
       conteudo: z.string()
    })
 
-   const {unit, rotina, modulo, conteudo} = createErrorBodySchema.parse(request.body)
+   const { unit, rotina, modulo, conteudo } = createErrorBodySchema.parse(request.body)
 
    const createUseCase = makeCreateErrorUseCase()
 
-	const {error} = await createUseCase.execute({
+   const { error } = await createUseCase.execute({
       unit,
       rotina,
       modulo,
       conteudo
-	})
+   })
 
    return reply.status(201).send({
       error,

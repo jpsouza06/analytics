@@ -1,5 +1,5 @@
 import { PrismaSystemStartedRepository } from '@/repositories/prisma/system-started-repository'
-import { GetSystemStartedUseCase } from '../get-system-started'
+import { GetSystemStartedUseCase } from '../../get-system-started'
 
 export function makeGetSystemStartedUseCase() {
    const systemStartedRepository = new PrismaSystemStartedRepository()

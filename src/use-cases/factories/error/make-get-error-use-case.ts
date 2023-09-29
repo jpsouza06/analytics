@@ -1,5 +1,5 @@
 import { PrismaErrorsRepository } from '@/repositories/prisma/prisma-errors-repository'
-import { GetErrorUseCase } from '../get-error'
+import { GetErrorUseCase } from '../../get-error'
 
 export function makeGetErrorUseCase() {
 	const errorsRepository = new PrismaErrorsRepository()

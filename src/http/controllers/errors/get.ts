@@ -1,18 +1,17 @@
-import { prisma } from "@/lib/prisma";
-import { makeGetErrorUseCase } from "@/use-cases/factories/make-get-error-use-case";
+import { makeGetErrorUseCase } from "@/use-cases/factories/error/make-get-error-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function Get(request: FastifyRequest, reply: FastifyReply) {
    const getErrorsParamsSchema = z.object({
-		errorId: z.string().uuid()
-	})
+      errorId: z.string().uuid()
+   })
 
-   const {errorId} = getErrorsParamsSchema.parse(request.params)
-   
-	const getErrorUseCase = makeGetErrorUseCase()
+   const { errorId } = getErrorsParamsSchema.parse(request.params)
 
-   const {error} = await getErrorUseCase.execute({
+   const getErrorUseCase = makeGetErrorUseCase()
+
+   const { error } = await getErrorUseCase.execute({
       errorId,
    })
 
