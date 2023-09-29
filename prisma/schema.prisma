@@ -26,3 +26,22 @@ model PageView {
 
   @@map("pageViews")
 }
+
+model Event {
+  id        String   @id @default(uuid())
+  nome      String
+  conteudo  String
+  createdAt DateTime @default(now())
+
+  @@map("event")
+}
+
+model SystemStarted {
+  id        String   @id @default(uuid())
+  estado    String   @db.VarChar(2)
+  modulo    String
+  filial    String
+  createdAt DateTime @default(now())
+
+  @@map("systemStarted")
+}

@@ -6,29 +6,29 @@ import { ErrorsRepository } from "../errors-repository";
 export class InMemoryErrorsRepository implements ErrorsRepository {
    public items: Error[] = []
    async findManyByQuery(query: ErrorQuery, page: number) {
-      let itemsQuery: Error[] = []
+      let itemsQuery: Error[] = this.items
 
       query.unit && (
-         itemsQuery = this.items.filter(item => item.unit === query.unit)
-      ) 
+         itemsQuery = itemsQuery.filter(item => item.unit === query.unit)
+      )
 
       query.rotina && (
-         itemsQuery = this.items.filter(item => item.rotina === query.rotina)
-      ) 
+         itemsQuery = itemsQuery.filter(item => item.rotina === query.rotina)
+      )
 
       query.modulo && (
-         itemsQuery = this.items.filter(item => item.modulo === query.modulo)
-      ) 
+         itemsQuery = itemsQuery.filter(item => item.modulo === query.modulo)
+      )
 
       query.conteudo && (
-         itemsQuery = this.items.filter(item => item.conteudo === query.conteudo)
-      ) 
+         itemsQuery = itemsQuery.filter(item => item.conteudo === query.conteudo)
+      )
 
-      itemsQuery = this.items.filter(
+      itemsQuery = itemsQuery.filter(
          item => item.createdAt >= new Date(query.dataInicio)
       )
 
-      itemsQuery = this.items.filter(
+      itemsQuery = itemsQuery.filter(
          item => query.dataFim ?
             item.createdAt <= new Date(query.dataFim) :
             item.createdAt <= new Date()
@@ -39,7 +39,7 @@ export class InMemoryErrorsRepository implements ErrorsRepository {
    async findById(id: string) {
       const error = this.items.find(item => item.id === id)
 
-      if(!error) {
+      if (!error) {
          return null
       }
 
