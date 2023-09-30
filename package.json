@@ -8,8 +8,8 @@
   },
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
-    "start": "node build/server.js",
-    "build": "tsup src --out-dir build",
+    "start": "node dist/server.js",
+    "build": "tsup src",
     "test:e2e": "vitest run --config ./vite.config.e2e.ts",
     "test:e2e:watch": "vitest --config ./vite.config.e2e.ts",
     "test": "vitest run --dir src/use-cases",
