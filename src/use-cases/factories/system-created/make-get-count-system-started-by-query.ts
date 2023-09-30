@@ -5,5 +5,5 @@ export function makeGetCountSystemStartedByQueryUseCase() {
    const systemStartedRepository = new PrismaSystemStartedRepository()
    const getCountSystemStartedByQueryUseCase = new GetCountSystemStartedByQueryUseCase(systemStartedRepository)
 
-   getCountSystemStartedByQueryUseCase
+   return getCountSystemStartedByQueryUseCase
 }

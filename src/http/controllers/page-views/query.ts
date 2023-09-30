@@ -13,7 +13,7 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
    const queryPageViewParamsSchema = z.object({
       page: z.coerce.number().min(1).default(1)
    })
-   console.log(request.body)
+
    const { rotina, modulo, dataInicio, dataFim } = queryPageViewBodySchema.parse(request.body)
 
    const { page } = queryPageViewParamsSchema.parse(request.params)
