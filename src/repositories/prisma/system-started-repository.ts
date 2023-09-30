@@ -23,6 +23,11 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
                }
             }),
          },
+         orderBy: [
+            {
+               createdAt: 'desc'
+            }
+         ],
          take: 20,
          skip: (page - 1) * 20,
       })
