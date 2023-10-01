@@ -10,13 +10,19 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       filial: z.string().optional(),
       dataInicio: z.string(),
       dataFim: z.string().optional(),
+      orderBy: z.object({
+         estado: z.enum(['asc', 'desc']).optional(),
+         modulo: z.enum(['asc', 'desc']).optional(),
+         filial: z.enum(['asc', 'desc']).optional(),
+         createdAt: z.enum(['asc', 'desc']).optional()
+      }).optional()
    })
 
    const querySystemStartedParamsSchema = z.object({
       page: z.coerce.number().min(1).default(1)
    })
 
-   const { estado, modulo, filial, dataInicio, dataFim } = querySystemStartedBodySchema.parse(request.body)
+   const { estado, modulo, filial, dataInicio, dataFim, orderBy } = querySystemStartedBodySchema.parse(request.body)
 
    const { page } = querySystemStartedParamsSchema.parse(request.params)
 
@@ -27,7 +33,8 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       modulo,
       filial,
       dataInicio,
-      dataFim
+      dataFim,
+      orderBy
    }
 
    const { systemStarted } = await findSystemStartedByQueryUseCase.execute({

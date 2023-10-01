@@ -2,6 +2,14 @@ import { makeFindErrorByQueryUseCase } from "@/use-cases/factories/error/make-fi
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
+interface orderByProps {
+   unit?: 'asc' | 'desc',
+   rotina?: 'asc' | 'desc',
+   modulo?: 'asc' | 'desc',
+   conteudo?: 'asc' | 'desc',
+   createdAt?: 'asc' | 'desc',
+}
+
 export async function Query(request: FastifyRequest, reply: FastifyReply) {
    const queryErrorBodySchema = z.object({
       unit: z.string().optional(),
@@ -10,6 +18,13 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       conteudo: z.string().optional(),
       dataInicio: z.string(),
       dataFim: z.string().optional(),
+      orderBy: z.object({
+         unit: z.enum(['asc', 'desc']).optional(),
+         rotina: z.enum(['asc', 'desc']).optional(),
+         modulo: z.enum(['asc', 'desc']).optional(),
+         conteudo: z.enum(['asc', 'desc']).optional(),
+         createdAt: z.enum(['asc', 'desc']).optional()
+      }).optional()
    })
 
    const queryErrorParamsSchema = z.object({
@@ -22,7 +37,8 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       modulo,
       conteudo,
       dataInicio,
-      dataFim
+      dataFim,
+      orderBy
    } = queryErrorBodySchema.parse(request.body)
 
    const { page } = queryErrorParamsSchema.parse(request.params)
@@ -35,7 +51,8 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       modulo,
       conteudo,
       dataInicio,
-      dataFim
+      dataFim,
+      orderBy
    }
 
    const { errors } = await findErrorByQueryUseCase.execute({

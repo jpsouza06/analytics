@@ -8,13 +8,18 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       modulo: z.string().optional(),
       dataInicio: z.string(),
       dataFim: z.string().optional(),
+      orderBy: z.object({
+         rotina: z.enum(['asc', 'desc']).optional(),
+         modulo: z.enum(['asc', 'desc']).optional(),
+         createdAt: z.enum(['asc', 'desc']).optional()
+      }).optional()
    })
 
    const queryPageViewParamsSchema = z.object({
       page: z.coerce.number().min(1).default(1)
    })
 
-   const { rotina, modulo, dataInicio, dataFim } = queryPageViewBodySchema.parse(request.body)
+   const { rotina, modulo, dataInicio, dataFim, orderBy } = queryPageViewBodySchema.parse(request.body)
 
    const { page } = queryPageViewParamsSchema.parse(request.params)
 
@@ -24,7 +29,8 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       rotina,
       modulo,
       dataInicio,
-      dataFim
+      dataFim,
+      orderBy
    }
 
    const { pageViews } = await findPageViewByQueryUseCase.execute({

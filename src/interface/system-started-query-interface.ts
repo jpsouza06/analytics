@@ -4,6 +4,14 @@ export interface findSystemStartedQuery {
    filial?: string
    dataInicio: string;
    dataFim?: string;
+   orderBy?:
+   {
+      estado?: 'asc' | 'desc',
+      modulo?: 'asc' | 'desc',
+      filial?: 'asc' | 'desc',
+      createdAt?: 'asc' | 'desc',
+   }
+
 }
 
 export interface countSystemStartedQuery {

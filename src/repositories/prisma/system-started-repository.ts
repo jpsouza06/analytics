@@ -5,6 +5,7 @@ import { SystemStartedRepository } from "../system-started-repository";
 
 export class PrismaSystemStartedRepository implements SystemStartedRepository {
    async findManyByQuery(query: findSystemStartedQuery, page: number) {
+      console.log(query.orderBy)
       const systemStarted = await prisma.systemStarted.findMany({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),
@@ -23,11 +24,17 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
                }
             }),
          },
-         orderBy: [
-            {
-               createdAt: 'desc'
-            }
-         ],
+         orderBy:
+            query.orderBy ?
+               [
+                  { estado: query.orderBy.estado },
+                  { modulo: query.orderBy.modulo },
+                  { filial: query.orderBy.filial },
+                  { createdAt: query.orderBy.createdAt },
+               ] :
+               [
+                  { createdAt: 'desc' }
+               ],
          take: 20,
          skip: (page - 1) * 20,
       })

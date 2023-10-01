@@ -22,6 +22,12 @@ export class PrismaPageViewsRepository implements PageViewsRepository {
                }
             }),
          },
+         orderBy:
+            query.orderBy ?
+               query.orderBy :
+               [
+                  { createdAt: 'desc' }
+               ],
          take: 20,
          skip: (page - 1) * 20,
       })
