@@ -39,7 +39,7 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
    })
 
    if (!pageViews || pageViews.length === 0) {
-      return reply.status(400).send()
+      return reply.status(404).send()
    }
 
    return reply.status(200).send({
