@@ -16,7 +16,7 @@ describe('Find System Started', () => {
       await prisma.systemStarted.create({
          data: {
             estado: 'MG',
-            modulo: 'Modulo',
+            modulo: 'Modulo1',
             filial: 'Filial',
             createdAt: new Date('01-01-2022')
          }
