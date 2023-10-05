@@ -23,7 +23,9 @@ export class GetCountSystemStartedByQueryUseCase {
       const { count } = await this.systemStartedRepository.countByQuery(query)
 
       if (!count) {
-         throw new ResourceNotFoundError()
+         return {
+            count: 0
+         }
       }
 
       return {
