@@ -4,8 +4,38 @@ import { Prisma } from "@prisma/client";
 import { SystemStartedRepository } from "../system-started-repository";
 
 export class PrismaSystemStartedRepository implements SystemStartedRepository {
+
+   async countByState(query: countSystemStartedQuery) {
+      const score = await prisma.systemStarted.groupBy({
+         // where: {
+         //    ...(query.estado && { estado: { contains: query.estado } }),
+         //    ...(query.modulo && { modulo: { contains: query.modulo } }),
+         //    ...(query.filial && { filial: { contains: query.filial } }),
+         //    ...(query.dataInicio &&
+         //    {
+         //       createdAt: {
+         //          gte: new Date(query.dataInicio),
+         //          lte:
+         //             (
+         //                query.dataFim ?
+         //                   new Date(query.dataFim) :
+         //                   new Date()
+         //             )
+         //       }
+         //    }),
+         // },
+         by: ['estado'],
+         _count: true,
+      });
+
+      console.log(score);
+
+      return {
+         score,
+      }
+   }
+
    async findManyByQuery(query: findSystemStartedQuery, page: number) {
-      console.log(query.orderBy)
       const systemStarted = await prisma.systemStarted.findMany({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),

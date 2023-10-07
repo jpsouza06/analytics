@@ -7,7 +7,10 @@ interface GetCountSystemStartedByQueryUseCaseRequest {
 }
 
 interface GetCountSystemStartedByQueryUseCaseResponse {
-   count: number
+   score: [
+      { state: string, _count: number }
+   ]
+
 }
 
 export class GetCountSystemStartedByQueryUseCase {
@@ -19,17 +22,10 @@ export class GetCountSystemStartedByQueryUseCase {
       query
    }: GetCountSystemStartedByQueryUseCaseRequest
    ): Promise<GetCountSystemStartedByQueryUseCaseResponse> {
-
-      const { count } = await this.systemStartedRepository.countByQuery(query)
-
-      if (!count) {
-         return {
-            count: 0
-         }
-      }
+      const score = await this.systemStartedRepository.countByState(query)
 
       return {
-         count,
+         score,
       }
    }
 }
