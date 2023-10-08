@@ -13,16 +13,16 @@ describe('Get Page View Use Case', () => {
 	})
 
 	it('should be able to get a page view by id', async () => {
-		const {id} = await pageViewRepository.create({
-         id: 'pageviewid',
-         rotina: 'Rotina',
-         modulo: 'Modulo'
+		const { id } = await pageViewRepository.create({
+			id: 'pageviewid',
+			rotina: 'Rotina',
+			modulo: 'Modulo'
 		})
-      console.log(id)
+
 		const { pageView } = await sut.execute({
 			pageViewId: 'pageviewid'
 		})
-      
+
 		expect(pageView.id).toEqual('pageviewid')
 	})
 

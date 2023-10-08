@@ -37,7 +37,7 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       orderBy
    }
 
-   const { systemStarted } = await findSystemStartedByQueryUseCase.execute({
+   const { systemStarted, total } = await findSystemStartedByQueryUseCase.execute({
       query,
       page
    })
@@ -48,5 +48,6 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
 
    return reply.status(200).send({
       systemStarted,
+      total
    })
 }

@@ -27,7 +27,7 @@ describe('Get System Started Count', () => {
          .send({
             dataInicio: '01-01-2020'
          })
-      console.log(response.body.score)
+
       expect(response.statusCode).toEqual(200)
    })
 })

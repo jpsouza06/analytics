@@ -9,7 +9,8 @@ interface FindSystemStartedByQueryUseCaseRequest {
 }
 
 interface FindSystemStartedByQueryUseCaseResponse {
-   systemStarted: SystemStarted[]
+   systemStarted: SystemStarted[],
+   total: number
 }
 
 export class FindSystemStartedByQueryUseCase {
@@ -22,15 +23,17 @@ export class FindSystemStartedByQueryUseCase {
       page
    }: FindSystemStartedByQueryUseCaseRequest
    ): Promise<FindSystemStartedByQueryUseCaseResponse> {
-      const systemStarted =
-         await this.systemStartedRepository.findManyByQuery(query, page)
+      const systemStarted = await this.systemStartedRepository.findManyByQuery(query, page)
 
       if (!systemStarted) {
          throw new ResourceNotFoundError()
       }
 
+      const { count } = await this.systemStartedRepository.countByQuery(query)
+
       return {
          systemStarted,
+         total: count
       }
    }
 }

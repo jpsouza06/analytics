@@ -49,7 +49,7 @@ describe('Find System Started Use Case', () => {
          })
       }
 
-      const { systemStarted } = await sut.execute({
+      const { systemStarted, total } = await sut.execute({
          query: {
             estado: 'MG',
             modulo: 'Modulo',
@@ -60,6 +60,7 @@ describe('Find System Started Use Case', () => {
       })
 
       expect(systemStarted).toHaveLength(1)
+      expect(total).toEqual(21)
    })
 
    it('should be able to find system started between dates', async () => {

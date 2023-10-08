@@ -6,7 +6,7 @@ import { SystemStartedRepository } from "../system-started-repository";
 export class PrismaSystemStartedRepository implements SystemStartedRepository {
 
    async countByState(query: countSystemStartedQuery) {
-      const score = await prisma.systemStarted.groupBy({
+      const count = await prisma.systemStarted.groupBy({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
@@ -29,7 +29,7 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
       });
 
       return {
-         score,
+         count,
       }
    }
 
