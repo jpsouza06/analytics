@@ -30,13 +30,21 @@ describe('Get Count System Started Use Case', () => {
          modulo: 'modulo',
       })
 
-      const { count } = await sut.execute({
+      await systemStartedRepository.create({
+         estado: 'RJ',
+         filial: 'filial',
+         modulo: 'modulo1',
+      })
+
+      const { score } = await sut.execute({
          query: {
-            estado: 'MG',
-            dataInicio: new Date('01-01-2000').toString()
+            dataInicio: new Date('01-01-2000').toString(),
+            modulo: 'modulo'
          }
       })
 
-      expect(count).toEqual(2)
+      expect(score).toEqual(
+         expect.objectContaining({ 'MG': 2, 'RJ': 1 })
+      )
    })
 })

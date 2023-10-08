@@ -25,10 +25,9 @@ describe('Get System Started Count', () => {
       const response = await request(app.server)
          .post('/system-started/query/count')
          .send({
-            estado: 'MG',
             dataInicio: '01-01-2020'
          })
-
+      console.log(response.body.score)
       expect(response.statusCode).toEqual(200)
    })
 })

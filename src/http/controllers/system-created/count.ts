@@ -25,11 +25,11 @@ export async function Count(request: FastifyRequest, reply: FastifyReply) {
       dataFim
    }
 
-   const { count } = await getCountSystemStartedByQueryUseCase.execute({
+   const { score } = await getCountSystemStartedByQueryUseCase.execute({
       query
    })
 
    return reply.status(200).send({
-      count,
+      score,
    })
 }

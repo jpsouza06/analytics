@@ -7,28 +7,26 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
 
    async countByState(query: countSystemStartedQuery) {
       const score = await prisma.systemStarted.groupBy({
-         // where: {
-         //    ...(query.estado && { estado: { contains: query.estado } }),
-         //    ...(query.modulo && { modulo: { contains: query.modulo } }),
-         //    ...(query.filial && { filial: { contains: query.filial } }),
-         //    ...(query.dataInicio &&
-         //    {
-         //       createdAt: {
-         //          gte: new Date(query.dataInicio),
-         //          lte:
-         //             (
-         //                query.dataFim ?
-         //                   new Date(query.dataFim) :
-         //                   new Date()
-         //             )
-         //       }
-         //    }),
-         // },
+         where: {
+            ...(query.estado && { estado: { contains: query.estado } }),
+            ...(query.modulo && { modulo: { contains: query.modulo } }),
+            ...(query.filial && { filial: { contains: query.filial } }),
+            ...(query.dataInicio &&
+            {
+               createdAt: {
+                  gte: new Date(query.dataInicio),
+                  lte:
+                     (
+                        query.dataFim ?
+                           new Date(query.dataFim) :
+                           new Date()
+                     )
+               }
+            }),
+         },
          by: ['estado'],
          _count: true,
       });
-
-      console.log(score);
 
       return {
          score,

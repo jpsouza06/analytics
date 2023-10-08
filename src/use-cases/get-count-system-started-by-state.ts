@@ -8,7 +8,7 @@ interface GetCountSystemStartedByQueryUseCaseRequest {
 
 interface GetCountSystemStartedByQueryUseCaseResponse {
    score: [
-      { state: string, _count: number }
+      { estado: string, _count: number }
    ]
 
 }
