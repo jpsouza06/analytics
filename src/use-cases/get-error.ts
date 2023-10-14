@@ -13,12 +13,12 @@ interface GetErrorUseCaseResponse {
 export class GetErrorUseCase {
    constructor(
       private errorsRepository: ErrorsRepository
-   ) {}
+   ) { }
 
    async execute({
       errorId
    }: GetErrorUseCaseRequest): Promise<GetErrorUseCaseResponse> {
-      
+
       const error = await this.errorsRepository.findById(errorId)
 
       if (!error) {

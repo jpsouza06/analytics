@@ -21,6 +21,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/swagger": "8.11.0",
+    "@fastify/swagger-ui": "1.10.1",
     "@prisma/client": "^5.3.1",
     "dotenv": "^16.3.1",
     "fastify": "^4.23.2",
