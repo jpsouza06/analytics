@@ -1,7 +1,7 @@
 export interface PageViewQuery {
    rotina?: string;
    modulo?: string;
-   dataInicio: string;
+   dataInicio?: string;
    dataFim?: string;
    orderBy?:
    {

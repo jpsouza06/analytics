@@ -9,18 +9,14 @@ export class PrismaPageViewsRepository implements PageViewsRepository {
          where: {
             ...(query.rotina && { rotina: { contains: query.rotina } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
-            ...(query.dataInicio &&
-            {
-               createdAt: {
-                  gte: new Date(query.dataInicio),
-                  lte:
-                     (
-                        query.dataFim ?
-                           new Date(query.dataFim) :
-                           new Date()
-                     )
-               }
-            }),
+            createdAt: {
+               gte: (
+                  query.dataInicio && new Date(query.dataInicio)
+               ),
+               lte: (
+                  query.dataFim && new Date(query.dataFim)
+               )
+            }
          },
          orderBy:
             query.orderBy ?

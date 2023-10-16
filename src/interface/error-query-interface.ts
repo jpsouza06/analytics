@@ -3,7 +3,7 @@ export interface ErrorQuery {
    rotina?: string;
    modulo?: string;
    conteudo?: string;
-   dataInicio: string;
+   dataInicio?: string;
    dataFim?: string;
    orderBy?:
    {

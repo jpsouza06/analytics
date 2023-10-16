@@ -8,7 +8,7 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       estado: z.string().optional(),
       modulo: z.string().optional(),
       filial: z.string().optional(),
-      dataInicio: z.string(),
+      dataInicio: z.string().optional(),
       dataFim: z.string().optional(),
       orderBy: z.object({
          estado: z.enum(['asc', 'desc']).optional(),

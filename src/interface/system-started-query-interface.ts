@@ -2,7 +2,7 @@ export interface findSystemStartedQuery {
    estado?: string
    modulo?: string
    filial?: string
-   dataInicio: string;
+   dataInicio?: string;
    dataFim?: string;
    orderBy?:
    {
@@ -18,6 +18,6 @@ export interface countSystemStartedQuery {
    estado?: string
    modulo?: string
    filial?: string
-   dataInicio: string;
+   dataInicio?: string;
    dataFim?: string;
 }

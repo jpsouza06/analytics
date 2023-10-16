@@ -24,14 +24,16 @@ export class InMemoryErrorsRepository implements ErrorsRepository {
          itemsQuery = itemsQuery.filter(item => item.conteudo === query.conteudo)
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => item.createdAt >= new Date(query.dataInicio)
+      query.dataInicio && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataInicio && item.createdAt >= new Date(query.dataInicio)
+         )
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => query.dataFim ?
-            item.createdAt <= new Date(query.dataFim) :
-            item.createdAt <= new Date()
+      query.dataFim && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataFim && item.createdAt <= new Date(query.dataFim)
+         )
       )
 
       return itemsQuery.slice((page - 1) * 20, page * 20)

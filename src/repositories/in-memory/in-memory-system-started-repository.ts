@@ -22,16 +22,17 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
          itemsQuery = itemsQuery.filter(item => item.filial === query.filial)
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => item.createdAt >= new Date(query.dataInicio)
+      query.dataInicio && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataInicio && item.createdAt >= new Date(query.dataInicio)
+         )
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => query.dataFim ?
-            item.createdAt <= new Date(query.dataFim) :
-            item.createdAt <= new Date()
+      query.dataFim && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataFim && item.createdAt <= new Date(query.dataFim)
+         )
       )
-
 
       itemsQuery.forEach((item) => {
          const estado = item.estado;
@@ -62,14 +63,16 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
          itemsQuery = itemsQuery.filter(item => item.filial === query.filial)
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => item.createdAt >= new Date(query.dataInicio)
+      query.dataInicio && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataInicio && item.createdAt >= new Date(query.dataInicio)
+         )
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => query.dataFim ?
-            item.createdAt <= new Date(query.dataFim) :
-            item.createdAt <= new Date()
+      query.dataFim && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataFim && item.createdAt <= new Date(query.dataFim)
+         )
       )
 
       return itemsQuery.slice((page - 1) * 20, page * 20)
@@ -89,14 +92,16 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
          itemsQuery = itemsQuery.filter(item => item.filial === query.filial)
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => item.createdAt >= new Date(query.dataInicio)
+      query.dataInicio && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataInicio && item.createdAt >= new Date(query.dataInicio)
+         )
       )
 
-      itemsQuery = itemsQuery.filter(
-         item => query.dataFim ?
-            item.createdAt <= new Date(query.dataFim) :
-            item.createdAt <= new Date()
+      query.dataFim && (
+         itemsQuery = itemsQuery.filter(
+            item => query.dataFim && item.createdAt <= new Date(query.dataFim)
+         )
       )
 
       return {

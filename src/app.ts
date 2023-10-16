@@ -64,12 +64,19 @@ app.register((app, options, done) => {
                },
             },
             404: {
-               description: 'Reposta de não encontrado',
+               description: 'Reposta de erro não encontrado',
                type: 'object',
                properties: {
-                  message: { type: 'string', example: 'Not Found' }
+                  message: { type: 'string', example: 'Resource not found.' }
                }
-            }
+            },
+            500: {
+               description: 'Erro interno do servidor',
+               type: 'object',
+               properties: {
+                  message: { type: 'string' }
+               }
+            },
          },
       },
       handler: (req, res) => {

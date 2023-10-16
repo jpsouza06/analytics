@@ -11,18 +11,14 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
             ...(query.estado && { estado: { contains: query.estado } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
             ...(query.filial && { filial: { contains: query.filial } }),
-            ...(query.dataInicio &&
-            {
-               createdAt: {
-                  gte: new Date(query.dataInicio),
-                  lte:
-                     (
-                        query.dataFim ?
-                           new Date(query.dataFim) :
-                           new Date()
-                     )
-               }
-            }),
+            createdAt: {
+               gte: (
+                  query.dataInicio && new Date(query.dataInicio)
+               ),
+               lte: (
+                  query.dataFim && new Date(query.dataFim)
+               )
+            }
          },
          by: ['estado'],
          _count: true,
@@ -39,27 +35,20 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
             ...(query.estado && { estado: { contains: query.estado } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
             ...(query.filial && { filial: { contains: query.filial } }),
-            ...(query.dataInicio &&
-            {
-               createdAt: {
-                  gte: new Date(query.dataInicio),
-                  lte:
-                     (
-                        query.dataFim ?
-                           new Date(query.dataFim) :
-                           new Date()
-                     )
-               }
-            }),
+
+            createdAt: {
+               gte: (
+                  query.dataInicio && new Date(query.dataInicio)
+               ),
+               lte: (
+                  query.dataFim && new Date(query.dataFim)
+               )
+            }
+
          },
          orderBy:
             query.orderBy ?
-               [
-                  { estado: query.orderBy.estado },
-                  { modulo: query.orderBy.modulo },
-                  { filial: query.orderBy.filial },
-                  { createdAt: query.orderBy.createdAt },
-               ] :
+               query.orderBy :
                [
                   { createdAt: 'desc' }
                ],
@@ -75,18 +64,14 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
             ...(query.estado && { estado: { contains: query.estado } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
             ...(query.filial && { filial: { contains: query.filial } }),
-            ...(query.dataInicio &&
-            {
-               createdAt: {
-                  gte: new Date(query.dataInicio),
-                  lte:
-                     (
-                        query.dataFim ?
-                           new Date(query.dataFim) :
-                           new Date()
-                     )
-               }
-            }),
+            createdAt: {
+               gte: (
+                  query.dataInicio && new Date(query.dataInicio)
+               ),
+               lte: (
+                  query.dataFim && new Date(query.dataFim)
+               )
+            }
          }
       })
 
