@@ -1,4 +1,4 @@
-##Como rodar a API
+# Como rodar a API
 
 # Requisitos mínimos:
 - Node 18;
@@ -27,21 +27,21 @@ e não tenha alterado nada no arquivo, o caminho do banco vai ser o mesmo que es
 '.env.example')'
 
 - Rode as migrations do prisma
--- Homologação:
-```
-npx prisma migrate dev
-```
--- Produção:
-```
-npx prisma migrate deploy
-```
+  - Homologação:
+  ```
+  npx prisma migrate dev
+  ```
+  - Produção:
+  ```
+  npx prisma migrate deploy
+  ```
 
 - Inicie a aplicação:
 ```
 npm run start:dev
 ```
 
-- Use a aplicação pelo:
+- Use a aplicação:
 ```
 http://localhost:3333
 ```
