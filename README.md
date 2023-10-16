@@ -1,6 +1,48 @@
-Analytics é uma API com o intuito de substituir o google analytics.
+###Como rodar a API
 
-Nela é possivel fazer requisoções Post e Get de Errors, Pageview e SystemStarted;
+## Requisitos mínimos:
+- Node 18;
+- Docker desktop(caso for rodar o banco em homologação);
 
-Inicialmente em Errors guardaria as informações de qualquer erro que queira informar e a PageView serviria como uma contagem para toda vez que alguem abrir uma tela;
-Ja o SystemStarted guardaria informações toda vez que o sistema for aberto;
+## Como executar a aplicação:
+- Clone a aplicação
+```
+git clone https://github.com/jpsouza06/analytics.git
+```
+
+- Instale as dependências
+```
+npm install
+```
+
+- Crie o banco no docker usando o docker-compose
+```
+docker-compose up -d
+```
+
+- Crie um arquivo '.env' na raiz do projeto, o conteudo desse arquivo deve 
+seguir como exemplo o arquivo '.env.example'. Informe o caminho do banco de 
+dados na 'DATABASE_URL(Obs.: Caso tenha usado o docker-compose para subir o banco
+e não tenha alterado nada no arquivo,o caminho do banco vai ser o mesmo que esta no
+'.env.example')'
+
+- Rode as migrations do prisma
+Homologação:
+```
+npx prisma migrate dev
+```
+Produção:
+```
+npx prisma migrate deploy
+```
+
+- Inicie a aplicação:
+```
+npm run start:dev
+```
+
+- Use a aplicação pelo:
+```
+http://localhost:3333
+```
+
