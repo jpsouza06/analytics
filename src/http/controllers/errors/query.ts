@@ -2,21 +2,13 @@ import { makeFindErrorByQueryUseCase } from "@/use-cases/factories/error/make-fi
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-interface orderByProps {
-   unit?: 'asc' | 'desc',
-   rotina?: 'asc' | 'desc',
-   modulo?: 'asc' | 'desc',
-   conteudo?: 'asc' | 'desc',
-   createdAt?: 'asc' | 'desc',
-}
-
 export async function Query(request: FastifyRequest, reply: FastifyReply) {
    const queryErrorBodySchema = z.object({
       unit: z.string().optional(),
       rotina: z.string().optional(),
       modulo: z.string().optional(),
       conteudo: z.string().optional(),
-      dataInicio: z.string(),
+      dataInicio: z.string().optional(),
       dataFim: z.string().optional(),
       orderBy: z.object({
          unit: z.enum(['asc', 'desc']).optional(),
@@ -31,40 +23,51 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       page: z.coerce.number().min(1).default(1)
    })
 
-   const {
-      unit,
-      rotina,
-      modulo,
-      conteudo,
-      dataInicio,
-      dataFim,
-      orderBy
-   } = queryErrorBodySchema.parse(request.body)
+   try {
+      const {
+         unit,
+         rotina,
+         modulo,
+         conteudo,
+         dataInicio,
+         dataFim,
+         orderBy
+      } = queryErrorBodySchema.parse(request.body)
 
-   const { page } = queryErrorParamsSchema.parse(request.params)
+      const { page } = queryErrorParamsSchema.parse(request.params)
 
-   const findErrorByQueryUseCase = makeFindErrorByQueryUseCase()
+      const findErrorByQueryUseCase = makeFindErrorByQueryUseCase()
 
-   const query = {
-      unit,
-      rotina,
-      modulo,
-      conteudo,
-      dataInicio,
-      dataFim,
-      orderBy
+      const query = {
+         unit,
+         rotina,
+         modulo,
+         conteudo,
+         dataInicio,
+         dataFim,
+         orderBy
+      }
+
+      const { errors } = await findErrorByQueryUseCase.execute({
+         query,
+         page
+      })
+
+      if (!errors || errors.length === 0) {
+         return reply.status(404).send()
+      }
+
+      return reply.status(200).send({
+         errors,
+      })
+   } catch (err) {
+      if (err instanceof z.ZodError) {
+         console.log(err)
+         return reply.status(400).send({ message: err.issues })
+      }
+
+      return reply.status(500).send('Erro interno do servidor');
    }
 
-   const { errors } = await findErrorByQueryUseCase.execute({
-      query,
-      page
-   })
 
-   if (!errors || errors.length === 0) {
-      return reply.status(404).send()
-   }
-
-   return reply.status(200).send({
-      errors,
-   })
 }

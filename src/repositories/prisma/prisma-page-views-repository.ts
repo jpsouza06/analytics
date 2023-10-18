@@ -20,7 +20,12 @@ export class PrismaPageViewsRepository implements PageViewsRepository {
          },
          orderBy:
             query.orderBy ?
-               query.orderBy :
+               [
+                  query.orderBy.rotina ? { rotina: query.orderBy.rotina } : {},
+                  query.orderBy.modulo ? { modulo: query.orderBy.modulo } : {},
+                  query.orderBy.createdAt ? { createdAt: query.orderBy.createdAt } : {},
+               ]
+               :
                [
                   { createdAt: 'desc' }
                ],

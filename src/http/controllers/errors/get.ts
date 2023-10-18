@@ -8,11 +8,11 @@ export async function Get(request: FastifyRequest, reply: FastifyReply) {
       errorId: z.string().uuid()
    })
 
-   const { errorId } = getErrorsParamsSchema.parse(request.params)
-
-   const getErrorUseCase = makeGetErrorUseCase()
-
    try {
+      const { errorId } = getErrorsParamsSchema.parse(request.params)
+
+      const getErrorUseCase = makeGetErrorUseCase()
+
       const { error } = await getErrorUseCase.execute({
          errorId,
       })
@@ -24,6 +24,10 @@ export async function Get(request: FastifyRequest, reply: FastifyReply) {
    } catch (error) {
       if (error instanceof ResourceNotFoundError) {
          return reply.status(404).send({ message: error.message })
+      }
+
+      if (error instanceof z.ZodError) {
+         return reply.status(400).send({ message: error.issues })
       }
 
       return reply.status(500).send('Erro interno do servidor');

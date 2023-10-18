@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { makeCreateErrorUseCase } from "@/use-cases/factories/error/make-create-error-use-case";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 
 export async function Create(request: FastifyRequest, reply: FastifyReply) {
    const createErrorBodySchema = z.object({
@@ -10,18 +11,29 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
       conteudo: z.string()
    })
 
-   const { unit, rotina, modulo, conteudo } = createErrorBodySchema.parse(request.body)
+   try {
+      const { unit, rotina, modulo, conteudo } = createErrorBodySchema.parse(request.body)
 
-   const createUseCase = makeCreateErrorUseCase()
+      const createUseCase = makeCreateErrorUseCase()
 
-   const { error } = await createUseCase.execute({
-      unit,
-      rotina,
-      modulo,
-      conteudo
-   })
+      const { error } = await createUseCase.execute({
+         unit,
+         rotina,
+         modulo,
+         conteudo
+      })
 
-   return reply.status(201).send({
-      error,
-   })
+      return reply.status(201).send({
+         error,
+      })
+   } catch (error) {
+      if (error instanceof z.ZodError) {
+         console.log({ message: error.issues })
+         return reply.status(400).send({ message: error.issues })
+      }
+
+      return reply.status(500).send('Erro interno do servidor');
+   }
+
+
 }

@@ -48,7 +48,13 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
          },
          orderBy:
             query.orderBy ?
-               query.orderBy :
+               [
+                  query.orderBy.estado ? { estado: query.orderBy.estado } : {},
+                  query.orderBy.modulo ? { modulo: query.orderBy.modulo } : {},
+                  query.orderBy.filial ? { filial: query.orderBy.filial } : {},
+                  query.orderBy.createdAt ? { createdAt: query.orderBy.createdAt } : {},
+               ]
+               :
                [
                   { createdAt: 'desc' }
                ],
