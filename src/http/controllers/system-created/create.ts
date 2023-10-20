@@ -6,20 +6,28 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
    const createSystemCreatedSchema = z.object({
       estado: z.string().length(2),
       modulo: z.string(),
-      filial: z.string().default('00 - TESTE')
+      filial: z.string()
    })
+   try {
+      const { estado, modulo, filial } = createSystemCreatedSchema.parse(request.body)
 
-   const { estado, modulo, filial } = createSystemCreatedSchema.parse(request.body)
+      const createUseCase = makeCreateSystemStartedUseCase()
 
-   const createUseCase = makeCreateSystemStartedUseCase()
+      const { systemStarted } = await createUseCase.execute({
+         estado,
+         modulo,
+         filial
+      })
 
-   const { systemStarted } = await createUseCase.execute({
-      estado,
-      modulo,
-      filial
-   })
+      return reply.status(201).send({
+         systemStarted,
+      })
 
-   return reply.status(201).send({
-      systemStarted,
-   })
+   } catch (error) {
+      if (error instanceof z.ZodError) {
+         return reply.status(400).send({ message: error.issues })
+      }
+
+      return reply.status(500).send({ message: 'Erro interno do servidor' });
+   }
 }

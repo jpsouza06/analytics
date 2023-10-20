@@ -1,3 +1,4 @@
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 import { makeFindPageViewByQueryUseCase } from "@/use-cases/factories/page-view/make-find-page-view-by-query-use-case";
 import { makeFindSystemStartedByQueryUseCase } from "@/use-cases/factories/system-created/make-find-system-started-by-query-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
@@ -21,33 +22,41 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
    const querySystemStartedParamsSchema = z.object({
       page: z.coerce.number().min(1).default(1)
    })
+   try {
+      const { estado, modulo, filial, dataInicio, dataFim, orderBy } = querySystemStartedBodySchema.parse(request.body)
 
-   const { estado, modulo, filial, dataInicio, dataFim, orderBy } = querySystemStartedBodySchema.parse(request.body)
+      const { page } = querySystemStartedParamsSchema.parse(request.params)
 
-   const { page } = querySystemStartedParamsSchema.parse(request.params)
+      const findSystemStartedByQueryUseCase = makeFindSystemStartedByQueryUseCase()
 
-   const findSystemStartedByQueryUseCase = makeFindSystemStartedByQueryUseCase()
+      const query = {
+         estado,
+         modulo,
+         filial,
+         dataInicio,
+         dataFim,
+         orderBy
+      }
 
-   const query = {
-      estado,
-      modulo,
-      filial,
-      dataInicio,
-      dataFim,
-      orderBy
+      const { systemStarted, total } = await findSystemStartedByQueryUseCase.execute({
+         query,
+         page
+      })
+
+      return reply.status(200).send({
+         systemStarted,
+         total
+      })
+
+   } catch (error) {
+      if (error instanceof ResourceNotFoundError) {
+         return reply.status(404).send({ message: error.message })
+      }
+
+      if (error instanceof z.ZodError) {
+         return reply.status(400).send({ message: error.issues })
+      }
+
+      return reply.status(500).send({ message: 'Erro interno do servidor' });
    }
-
-   const { systemStarted, total } = await findSystemStartedByQueryUseCase.execute({
-      query,
-      page
-   })
-
-   if (!systemStarted || systemStarted.length === 0) {
-      return reply.status(404).send()
-   }
-
-   return reply.status(200).send({
-      systemStarted,
-      total
-   })
 }

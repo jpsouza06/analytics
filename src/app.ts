@@ -4,7 +4,6 @@ import fastify from 'fastify'
 import { errorRoutes } from './http/controllers/errors/routes'
 import { pageViewRoutes } from './http/controllers/page-views/routes'
 import { systemStartedRoutes } from './http/controllers/system-created/routes'
-import { errorSwagger } from './docs/error/swagger'
 
 export const app = fastify()
 
@@ -17,7 +16,7 @@ const swaggerOptions = {
       },
       schemes: ["http", "https"],
       consumes: ["application/json"],
-      produces: ["application/json"]
+      produces: ["application/json"],
    },
 }
 

@@ -15,13 +15,13 @@ interface FindPageViewByQueryUseCaseResponse {
 export class FindPageViewByQueryUseCase {
    constructor(
       private pageViewRepository: PageViewsRepository
-   ) {}
+   ) { }
 
    async execute({
       query,
       page
    }: FindPageViewByQueryUseCaseRequest): Promise<FindPageViewByQueryUseCaseResponse> {
-      
+
       const pageViews = await this.pageViewRepository.findManyByQuery(query, page)
 
       if (!pageViews) {
