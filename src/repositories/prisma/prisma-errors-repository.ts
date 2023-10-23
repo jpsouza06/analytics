@@ -5,6 +5,23 @@ import { ErrorsRepository } from "../errors-repository";
 
 export class PrismaErrorsRepository implements ErrorsRepository {
    async findManyByQuery(query: ErrorQuery, page: number) {
+      const total = await prisma.error.count({
+         where: {
+            ...(query.unit && { unit: { contains: query.unit } }),
+            ...(query.rotina && { rotina: { contains: query.rotina } }),
+            ...(query.modulo && { modulo: { contains: query.modulo } }),
+            ...(query.conteudo && { conteudo: { contains: query.conteudo } }),
+            createdAt: {
+               gte: (
+                  query.dataInicio && new Date(query.dataInicio)
+               ),
+               lte: (
+                  query.dataFim && new Date(query.dataFim)
+               )
+            }
+         }
+      })
+
       const errors = await prisma.error.findMany({
          where: {
             ...(query.unit && { unit: { contains: query.unit } }),
@@ -37,7 +54,10 @@ export class PrismaErrorsRepository implements ErrorsRepository {
          skip: (page - 1) * 20,
       })
 
-      return errors
+      return {
+         errors,
+         total
+      }
    }
    async findById(id: string) {
       const error = await prisma.error.findUnique({

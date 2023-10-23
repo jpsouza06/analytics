@@ -28,7 +28,10 @@ export class InMemoryPageViewsRepository implements PageViewsRepository {
          )
       )
 
-      return itemsQuery.slice((page - 1) * 20, page * 20)
+      return {
+         pageViews: itemsQuery.slice((page - 1) * 20, page * 20),
+         total: itemsQuery.length
+      }
    }
    async findById(id: string) {
       const pageView = this.items.find(item => item.id === id)

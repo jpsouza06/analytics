@@ -34,13 +34,14 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
          orderBy
       }
 
-      const { pageViews } = await findPageViewByQueryUseCase.execute({
+      const { pageViews, total } = await findPageViewByQueryUseCase.execute({
          query,
          page
       })
 
       return reply.status(200).send({
          pageViews,
+         total
       })
 
    } catch (error) {

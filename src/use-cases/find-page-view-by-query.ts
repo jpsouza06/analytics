@@ -9,7 +9,8 @@ interface FindPageViewByQueryUseCaseRequest {
 }
 
 interface FindPageViewByQueryUseCaseResponse {
-   pageViews: PageView[]
+   pageViews: PageView[],
+   total: number
 }
 
 export class FindPageViewByQueryUseCase {
@@ -22,14 +23,15 @@ export class FindPageViewByQueryUseCase {
       page
    }: FindPageViewByQueryUseCaseRequest): Promise<FindPageViewByQueryUseCaseResponse> {
 
-      const pageViews = await this.pageViewRepository.findManyByQuery(query, page)
+      const data = await this.pageViewRepository.findManyByQuery(query, page)
 
-      if (!pageViews) {
+      if (!data?.pageViews) {
          throw new ResourceNotFoundError()
       }
 
       return {
-         pageViews,
+         pageViews: data.pageViews,
+         total: data.total
       }
    }
 }

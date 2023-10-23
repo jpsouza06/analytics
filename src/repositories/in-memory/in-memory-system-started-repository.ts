@@ -75,7 +75,10 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
          )
       )
 
-      return itemsQuery.slice((page - 1) * 20, page * 20)
+      return {
+         systemStarted: itemsQuery.slice((page - 1) * 20, page * 20),
+         total: itemsQuery.length
+      }
    }
    async countByQuery(query: countSystemStartedQuery) {
       let itemsQuery: SystemStarted[] = this.items

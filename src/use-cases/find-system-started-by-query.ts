@@ -23,17 +23,15 @@ export class FindSystemStartedByQueryUseCase {
       page
    }: FindSystemStartedByQueryUseCaseRequest
    ): Promise<FindSystemStartedByQueryUseCaseResponse> {
-      const systemStarted = await this.systemStartedRepository.findManyByQuery(query, page)
+      const data = await this.systemStartedRepository.findManyByQuery(query, page)
 
-      if (!systemStarted) {
+      if (!data) {
          throw new ResourceNotFoundError()
       }
 
-      const { count } = await this.systemStartedRepository.countByQuery(query)
-
       return {
-         systemStarted,
-         total: count
+         systemStarted: data.systemStarted,
+         total: data.total
       }
    }
 }

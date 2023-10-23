@@ -54,7 +54,7 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       }
 
       if (error instanceof z.ZodError) {
-         return reply.status(400).send({ message: error.issues })
+         return reply.status(400).send({ message: error.issues[0].message })
       }
 
       return reply.status(500).send({ message: 'Erro interno do servidor' });

@@ -5,6 +5,21 @@ import { PageViewsRepository } from "../page-views-repository";
 
 export class PrismaPageViewsRepository implements PageViewsRepository {
    async findManyByQuery(query: PageViewQuery, page: number) {
+      const total = await prisma.pageView.count({
+         where: {
+            ...(query.rotina && { rotina: { contains: query.rotina } }),
+            ...(query.modulo && { modulo: { contains: query.modulo } }),
+            createdAt: {
+               gte: (
+                  query.dataInicio && new Date(query.dataInicio)
+               ),
+               lte: (
+                  query.dataFim && new Date(query.dataFim)
+               )
+            }
+         }
+      })
+
       const pageViews = await prisma.pageView.findMany({
          where: {
             ...(query.rotina && { rotina: { contains: query.rotina } }),
@@ -33,7 +48,11 @@ export class PrismaPageViewsRepository implements PageViewsRepository {
          skip: (page - 1) * 20,
       })
 
-      return pageViews
+      return {
+         pageViews,
+         total
+      }
+
    }
    async findById(id: string) {
       const pageView = await prisma.pageView.findUnique({

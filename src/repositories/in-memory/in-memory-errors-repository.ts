@@ -36,7 +36,10 @@ export class InMemoryErrorsRepository implements ErrorsRepository {
          )
       )
 
-      return itemsQuery.slice((page - 1) * 20, page * 20)
+      return {
+         errors: itemsQuery.slice((page - 1) * 20, page * 20),
+         total: itemsQuery.length
+      }
    }
    async findById(id: string) {
       const error = this.items.find(item => item.id === id)

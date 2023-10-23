@@ -30,6 +30,23 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
    }
 
    async findManyByQuery(query: findSystemStartedQuery, page: number) {
+      const total = await prisma.systemStarted.count({
+         where: {
+            ...(query.estado && { estado: { contains: query.estado } }),
+            ...(query.modulo && { modulo: { contains: query.modulo } }),
+            ...(query.filial && { filial: { contains: query.filial } }),
+
+            createdAt: {
+               gte: (
+                  query.dataInicio && new Date(query.dataInicio)
+               ),
+               lte: (
+                  query.dataFim && new Date(query.dataFim)
+               )
+            }
+         },
+      });
+
       const systemStarted = await prisma.systemStarted.findMany({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),
@@ -44,7 +61,6 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
                   query.dataFim && new Date(query.dataFim)
                )
             }
-
          },
          orderBy:
             query.orderBy ?
@@ -62,7 +78,10 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
          skip: (page - 1) * 20,
       })
 
-      return systemStarted
+      return {
+         systemStarted,
+         total
+      }
    }
    async countByQuery(query: countSystemStartedQuery) {
       const count = await prisma.systemStarted.count({

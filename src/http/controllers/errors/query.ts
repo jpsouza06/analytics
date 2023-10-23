@@ -1,3 +1,4 @@
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 import { makeFindErrorByQueryUseCase } from "@/use-cases/factories/error/make-find-error-by-query-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
@@ -48,22 +49,22 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
          orderBy
       }
 
-      const { errors } = await findErrorByQueryUseCase.execute({
+      const { errors, total } = await findErrorByQueryUseCase.execute({
          query,
          page
       })
 
-      if (!errors || errors.length === 0) {
-         return reply.status(404).send()
-      }
-
       return reply.status(200).send({
          errors,
+         total
       })
-   } catch (err) {
-      if (err instanceof z.ZodError) {
-         console.log(err)
-         return reply.status(400).send({ message: err.issues })
+   } catch (error) {
+      if (error instanceof ResourceNotFoundError) {
+         return reply.status(404).send({ message: error.message })
+      }
+
+      if (error instanceof z.ZodError) {
+         return reply.status(400).send({ message: error.issues[0].message })
       }
 
       return reply.status(500).send('Erro interno do servidor');

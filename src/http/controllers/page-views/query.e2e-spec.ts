@@ -1,5 +1,5 @@
 import request from 'supertest'
-import {app} from '@/app'
+import { app } from '@/app'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { prisma } from '@/lib/prisma'
 
@@ -9,24 +9,24 @@ describe('Find Pages View', () => {
 	})
 
 	afterAll(async () => {
-		await app.close()   
+		await app.close()
 	})
-   
+
 	it('should be able to find a page view by query', async () => {
 		const pageView = await prisma.pageView.create({
-         data: {
-            rotina: 'Rotina',
-            modulo: 'Modulo',
+			data: {
+				rotina: 'Rotina',
+				modulo: 'Modulo',
 				createdAt: new Date('01-01-2022')
-         }
-      }) 
+			}
+		})
 
 		const response = await request(app.server)
 			.post('/page-view/query/1')
 			.send({
-            rotina: 'Rotina',
-				dataInicio: '01-01-2020'
-         })
+				rotina: 'Rotina',
+				dataInicio: '2020-01-01'
+			})
 
 		expect(response.statusCode).toEqual(200)
 	})

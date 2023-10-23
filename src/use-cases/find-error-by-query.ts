@@ -9,27 +9,29 @@ interface FindErrorByQueryUseCaseRequest {
 }
 
 interface FindErrorByQueryUseCaseResponse {
-   errors: Error[]
+   errors: Error[],
+   total: number
 }
 
 export class FindErrorByQueryUseCase {
    constructor(
       private errorsRepository: ErrorsRepository
-   ) {}
+   ) { }
 
    async execute({
       query,
       page
    }: FindErrorByQueryUseCaseRequest): Promise<FindErrorByQueryUseCaseResponse> {
-      
-      const errors = await this.errorsRepository.findManyByQuery(query, page)
 
-      if (!errors) {
+      const data = await this.errorsRepository.findManyByQuery(query, page)
+
+      if (!data?.errors) {
          throw new ResourceNotFoundError()
       }
 
       return {
-         errors,
+         errors: data.errors,
+         total: data.total
       }
    }
 }

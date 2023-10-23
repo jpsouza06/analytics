@@ -184,7 +184,8 @@ export const schemaQuery = {
                      "createdAt": "2023-10-17T00:48:08.507Z"
                   }
                ]
-            }
+            },
+            total: { type: "integer", example: 1 }
          },
       },
       400: {
