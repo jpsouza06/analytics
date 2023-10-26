@@ -1,11 +1,19 @@
 version: '3'
 
 services:
-  analytics:
+  database:
     image: bitnami/postgresql
     ports:
       - 5433:5432
     environment:
-      - POSTGRESQL_USERNAME=docker 
+      - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=analytics 
+      - POSTGRESQL_DATABASE=analytics
+
+  analytics:
+    build: .
+    ports:
+      - 3333:3333
+    environment:
+      - PORT=3333
+      - DATABASE_URL=postgresql://docker:docker@database:5432/analytics?schema=public

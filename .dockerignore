@@ -1,0 +1,9 @@
+node_modules
+.env
+docker-compose.yml
+Dockerfile
+dist
+data
+build
+src/coverage
+load-test
