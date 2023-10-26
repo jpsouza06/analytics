@@ -5,10 +5,18 @@ import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js"
 
 export const options = {
    stages: [
-      { duration: '1m', target: 1000 }, // below normal load // below normal load
-   ],
+      { duration: '2m', target:    1 }, // below normal load
+      { duration: '5m', target:    1 },
+      { duration: '2m', target:   40 }, // normal load
+      { duration: '5m', target:   40 },
+      { duration: '2m', target:   80 }, // around the breaking point
+      { duration: '5m', target:   80 },
+      { duration: '2m', target:  100 }, // beyond the breaking point
+      { duration: '5m', target:  100 },
+      { duration: '10m', target:   0 }, // scale down. Recovery stage.
+  ],
 }
-const url = 'http://locahost:3333'
+const url = 'http://192.168.3.242:30002'
 export default function () {
    describe('Error', () => {
       const data = JSON.stringify({
