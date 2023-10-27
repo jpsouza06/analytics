@@ -5,7 +5,7 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-FROM node:18.16.0-alpine
+FROM node:18.18.0-alpine
 RUN mkdir -p /analytics
 WORKDIR /analytics
 COPY --from=builder /analytics/dist .
