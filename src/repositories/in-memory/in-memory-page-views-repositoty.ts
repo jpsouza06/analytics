@@ -16,6 +16,10 @@ export class InMemoryPageViewsRepository implements PageViewsRepository {
          itemsQuery = itemsQuery.filter(item => item.modulo === query.modulo)
       )
 
+      query.codCliente && (
+         itemsQuery = itemsQuery.filter(item => item.codCliente === query.codCliente)
+      )
+
       query.dataInicio && (
          itemsQuery = itemsQuery.filter(
             item => query.dataInicio && item.createdAt >= new Date(query.dataInicio)
@@ -47,6 +51,7 @@ export class InMemoryPageViewsRepository implements PageViewsRepository {
          id: data.id ?? randomUUID(),
          rotina: data.rotina,
          modulo: data.modulo,
+         codCliente: data.codCliente,
          createdAt: data.createdAt ? new Date(data.createdAt) : new Date()
       }
 

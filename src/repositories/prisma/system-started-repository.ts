@@ -9,8 +9,11 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
       const count = await prisma.systemStarted.groupBy({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),
+            ...(query.cidade && { cidade: { contains: query.cidade } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
-            ...(query.filial && { filial: { contains: query.filial } }),
+            ...(query.codCliente && { codCliente: { contains: query.codCliente } }),
+            ...(query.versao && { versao: { contains: query.versao } }),
+
             createdAt: {
                gte: (
                   query.dataInicio && new Date(query.dataInicio)
@@ -33,8 +36,10 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
       const total = await prisma.systemStarted.count({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),
+            ...(query.cidade && { cidade: { contains: query.cidade } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
-            ...(query.filial && { filial: { contains: query.filial } }),
+            ...(query.codCliente && { codCliente: { contains: query.codCliente } }),
+            ...(query.versao && { versao: { contains: query.versao } }),
 
             createdAt: {
                gte: (
@@ -50,8 +55,10 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
       const systemStarted = await prisma.systemStarted.findMany({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),
+            ...(query.cidade && { cidade: { contains: query.cidade } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
-            ...(query.filial && { filial: { contains: query.filial } }),
+            ...(query.codCliente && { codCliente: { contains: query.codCliente } }),
+            ...(query.versao && { versao: { contains: query.versao } }),
 
             createdAt: {
                gte: (
@@ -66,8 +73,10 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
             query.orderBy ?
                [
                   query.orderBy.estado ? { estado: query.orderBy.estado } : {},
+                  query.orderBy.cidade ? { cidade: query.orderBy.cidade } : {},
                   query.orderBy.modulo ? { modulo: query.orderBy.modulo } : {},
-                  query.orderBy.filial ? { filial: query.orderBy.filial } : {},
+                  query.orderBy.codCliente ? { codCliente: query.orderBy.codCliente } : {},
+                  query.orderBy.versao ? { versao: query.orderBy.versao } : {},
                   query.orderBy.createdAt ? { createdAt: query.orderBy.createdAt } : {},
                ]
                :
@@ -87,8 +96,10 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
       const count = await prisma.systemStarted.count({
          where: {
             ...(query.estado && { estado: { contains: query.estado } }),
+            ...(query.cidade && { cidade: { contains: query.cidade } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
-            ...(query.filial && { filial: { contains: query.filial } }),
+            ...(query.codCliente && { codCliente: { contains: query.codCliente } }),
+            ...(query.versao && { versao: { contains: query.versao } }),
             createdAt: {
                gte: (
                   query.dataInicio && new Date(query.dataInicio)
@@ -114,6 +125,7 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
       return systemStarted
    }
    async create(data: Prisma.SystemStartedUncheckedCreateInput) {
+      console.log(data)
       const systemStarted = await prisma.systemStarted.create({
          data,
       })

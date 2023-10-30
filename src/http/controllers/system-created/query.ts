@@ -7,14 +7,16 @@ import { z } from "zod";
 export async function Query(request: FastifyRequest, reply: FastifyReply) {
    const querySystemStartedBodySchema = z.object({
       estado: z.string().optional(),
+      cidade: z.string().optional(),
       modulo: z.string().optional(),
-      filial: z.string().optional(),
+      codCliente: z.string().optional(),
       dataInicio: z.string().optional(),
       dataFim: z.string().optional(),
       orderBy: z.object({
          estado: z.enum(['asc', 'desc']).optional(),
+         cidade: z.enum(['asc', 'desc']).optional(),
          modulo: z.enum(['asc', 'desc']).optional(),
-         filial: z.enum(['asc', 'desc']).optional(),
+         codCliente: z.enum(['asc', 'desc']).optional(),
          createdAt: z.enum(['asc', 'desc']).optional()
       }).optional()
    })
@@ -23,7 +25,15 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
       page: z.coerce.number().min(1).default(1)
    })
    try {
-      const { estado, modulo, filial, dataInicio, dataFim, orderBy } = querySystemStartedBodySchema.parse(request.body)
+      const {
+         estado,
+         cidade,
+         modulo,
+         codCliente,
+         dataInicio,
+         dataFim,
+         orderBy
+      } = querySystemStartedBodySchema.parse(request.body)
 
       const { page } = querySystemStartedParamsSchema.parse(request.params)
 
@@ -31,8 +41,9 @@ export async function Query(request: FastifyRequest, reply: FastifyReply) {
 
       const query = {
          estado,
+         cidade,
          modulo,
-         filial,
+         codCliente,
          dataInicio,
          dataFim,
          orderBy

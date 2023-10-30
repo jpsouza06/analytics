@@ -1,5 +1,5 @@
 import request from 'supertest'
-import {app} from '@/app'
+import { app } from '@/app'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 describe('Create Page View', () => {
@@ -8,17 +8,18 @@ describe('Create Page View', () => {
 	})
 
 	afterAll(async () => {
-		await app.close()   
+		await app.close()
 	})
-   
+
 	it('should be able to create a page view', async () => {
 		const response = await request(app.server)
 			.post('/page-view')
 			.send({
 				rotina: 'Teste',
-				modulo: 'Teste', 
+				modulo: 'Teste',
+				codCliente: '1'
 			})
-      
+
 		expect(response.statusCode).toEqual(201)
 	})
 })

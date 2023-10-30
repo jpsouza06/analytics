@@ -15,11 +15,13 @@ describe('Find Page View Use Case', () => {
 		await pageViewRepository.create({
 			rotina: 'Rotina',
 			modulo: 'Modulo',
+			codCliente: '1'
 		})
 
 		await pageViewRepository.create({
 			rotina: 'Rotina1',
 			modulo: 'Modulo',
+			codCliente: '1'
 		})
 
 		const { pageViews } = await sut.execute({
@@ -41,6 +43,7 @@ describe('Find Page View Use Case', () => {
 			await pageViewRepository.create({
 				rotina: 'Rotina',
 				modulo: 'Modulo',
+				codCliente: '1'
 			})
 		}
 
@@ -62,12 +65,14 @@ describe('Find Page View Use Case', () => {
 		await pageViewRepository.create({
 			rotina: 'Rotina',
 			modulo: 'Modulo',
+			codCliente: '1',
 			createdAt: '01-01-2020'
 		})
 
 		await pageViewRepository.create({
 			rotina: 'Rotina',
 			modulo: 'Modulo',
+			codCliente: '1',
 			createdAt: '01-01-2022'
 		})
 

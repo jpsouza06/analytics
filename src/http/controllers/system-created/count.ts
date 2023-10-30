@@ -8,16 +8,18 @@ import { z } from "zod";
 export async function Count(request: FastifyRequest, reply: FastifyReply) {
    const querySystemStartedBodySchema = z.object({
       estado: z.string().optional(),
+      cidade: z.string().optional(),
       modulo: z.string().optional(),
-      filial: z.string().optional(),
+      codCliente: z.string().optional(),
       dataInicio: z.string().optional(),
       dataFim: z.string().optional(),
    })
 
    const {
       estado,
+      cidade,
       modulo,
-      filial,
+      codCliente,
       dataInicio,
       dataFim
    } = querySystemStartedBodySchema.parse(request.body)
@@ -27,8 +29,9 @@ export async function Count(request: FastifyRequest, reply: FastifyReply) {
 
       const query = {
          estado,
+         cidade,
          modulo,
-         filial,
+         codCliente,
          dataInicio,
          dataFim
       }

@@ -16,8 +16,10 @@ describe('Create System Started', () => {
          .post('/system-started')
          .send({
             estado: 'MG',
+            cidade: 'cidade',
             modulo: 'Teste',
-            filial: 'Teste'
+            codCliente: '1',
+            versão: '1'
          })
 
       expect(response.statusCode).toEqual(201)

@@ -12,11 +12,13 @@ describe('Create System Started Use Case', () => {
       sut = new CreateSystemStartedUseCase(systemStartedRepository)
    })
 
-   it('should be able to create a page view', async () => {
+   it('should be able to create a system started', async () => {
       const { systemStarted } = await sut.execute({
          estado: 'MG',
          modulo: 'Modulo',
-         filial: 'Filial',
+         codCliente: '1',
+         cidade: 'Cidade',
+         versao: '1'
       })
 
       expect(systemStarted.id).toEqual(expect.any(String))

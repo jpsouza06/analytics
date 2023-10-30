@@ -16,7 +16,8 @@ describe('Get Page View Use Case', () => {
 		const { id } = await pageViewRepository.create({
 			id: 'pageviewid',
 			rotina: 'Rotina',
-			modulo: 'Modulo'
+			modulo: 'Modulo',
+			codCliente: '1'
 		})
 
 		const { pageView } = await sut.execute({

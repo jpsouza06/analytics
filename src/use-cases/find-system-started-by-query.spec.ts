@@ -14,21 +14,25 @@ describe('Find System Started Use Case', () => {
    it('should be able to find system started by query', async () => {
       await systemStartedRepository.create({
          estado: 'MG',
+         cidade: 'Cidade',
          modulo: 'Modulo',
-         filial: 'filial'
+         codCliente: '1',
+         versao: '1'
       })
 
       await systemStartedRepository.create({
          estado: 'RJ',
+         cidade: 'Cidade',
          modulo: 'Modulo',
-         filial: 'filial'
+         codCliente: '1',
+         versao: '1'
       })
 
       const { systemStarted } = await sut.execute({
          query: {
             estado: 'MG',
             modulo: 'Modulo',
-            filial: 'filial',
+            codCliente: '1',
             dataInicio: new Date('01-01-2000').toString()
          },
          page: 1
@@ -44,8 +48,10 @@ describe('Find System Started Use Case', () => {
       for (let i = 0; i < 21; i++) {
          await systemStartedRepository.create({
             estado: 'MG',
+            cidade: 'Cidade',
             modulo: 'Modulo',
-            filial: 'filial'
+            codCliente: '1',
+            versao: '1'
          })
       }
 
@@ -53,7 +59,7 @@ describe('Find System Started Use Case', () => {
          query: {
             estado: 'MG',
             modulo: 'Modulo',
-            filial: 'filial',
+            codCliente: '1',
             dataInicio: new Date('01-01-2000').toString()
          },
          page: 2
@@ -66,15 +72,19 @@ describe('Find System Started Use Case', () => {
    it('should be able to find system started between dates', async () => {
       await systemStartedRepository.create({
          estado: 'MG',
+         cidade: 'Cidade',
          modulo: 'Modulo',
-         filial: 'filial',
+         codCliente: '1',
+         versao: '1',
          createdAt: '01-01-2020'
       })
 
       await systemStartedRepository.create({
          estado: 'MG',
+         cidade: 'Cidade',
          modulo: 'Modulo',
-         filial: 'filial',
+         codCliente: '1',
+         versao: '1',
          createdAt: '01-01-2022'
       })
 
