@@ -1,6 +1,5 @@
 import { ErrorsRepository } from "@/repositories/errors-repository";
 import { Error } from "@prisma/client";
-import dayjs from "dayjs";
 
 interface CreateErrorUseCaseRequest {
    unit: string;

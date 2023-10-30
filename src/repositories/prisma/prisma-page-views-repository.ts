@@ -1,7 +1,6 @@
 import { PageViewQuery } from "@/interface/page-view-query-interface";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
-import dayjs from "dayjs";
 import { PageViewsRepository } from "../page-views-repository";
 
 export class PrismaPageViewsRepository implements PageViewsRepository {
