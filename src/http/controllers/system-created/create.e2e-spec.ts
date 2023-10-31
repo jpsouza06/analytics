@@ -19,7 +19,7 @@ describe('Create System Started', () => {
             cidade: 'cidade',
             modulo: 'Teste',
             codCliente: '1',
-            versão: '1'
+            versao: '1'
          })
 
       expect(response.statusCode).toEqual(201)

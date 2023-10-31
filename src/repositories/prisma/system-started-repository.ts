@@ -125,7 +125,6 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
       return systemStarted
    }
    async create(data: Prisma.SystemStartedUncheckedCreateInput) {
-      console.log(data)
       const systemStarted = await prisma.systemStarted.create({
          data,
       })
