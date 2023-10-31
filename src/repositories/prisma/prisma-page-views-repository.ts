@@ -9,6 +9,7 @@ export class PrismaPageViewsRepository implements PageViewsRepository {
          where: {
             ...(query.rotina && { rotina: { contains: query.rotina } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
+            ...(query.codCliente && { codCliente: { contains: query.codCliente } }),
             createdAt: {
                gte: (
                   query.dataInicio && new Date(query.dataInicio)
@@ -24,6 +25,7 @@ export class PrismaPageViewsRepository implements PageViewsRepository {
          where: {
             ...(query.rotina && { rotina: { contains: query.rotina } }),
             ...(query.modulo && { modulo: { contains: query.modulo } }),
+            ...(query.codCliente && { codCliente: { contains: query.codCliente } }),
             createdAt: {
                gte: (
                   query.dataInicio && new Date(query.dataInicio)
@@ -38,6 +40,7 @@ export class PrismaPageViewsRepository implements PageViewsRepository {
                [
                   query.orderBy.rotina ? { rotina: query.orderBy.rotina } : {},
                   query.orderBy.modulo ? { modulo: query.orderBy.modulo } : {},
+                  query.orderBy.codCliente ? { codCliente: query.orderBy.codCliente } : {},
                   query.orderBy.createdAt ? { createdAt: query.orderBy.createdAt } : {},
                ]
                :

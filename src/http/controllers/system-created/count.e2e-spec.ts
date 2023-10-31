@@ -16,8 +16,10 @@ describe('Get System Started Count', () => {
       await prisma.systemStarted.create({
          data: {
             estado: 'MG',
+            cidade: 'cidade',
             modulo: 'Modulo',
-            filial: 'Filial',
+            codCliente: '1',
+            versao: '1',
             createdAt: new Date('01-01-2022')
          }
       })

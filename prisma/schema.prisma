@@ -19,10 +19,11 @@ model Error {
 }
 
 model PageView {
-  id        String   @id @default(uuid())
-  rotina    String
-  modulo    String
-  createdAt DateTime @default(now())
+  id         String   @id @default(uuid())
+  rotina     String
+  modulo     String
+  codCliente String
+  createdAt  DateTime @default(now())
 
   @@map("pageViews")
 }
@@ -37,11 +38,13 @@ model Event {
 }
 
 model SystemStarted {
-  id        String   @id @default(uuid())
-  estado    String   @db.VarChar(2)
-  modulo    String
-  filial    String
-  createdAt DateTime @default(now())
+  id         String   @id @default(uuid())
+  estado     String   @db.VarChar(2)
+  cidade     String
+  modulo     String
+  codCliente String
+  versao     String
+  createdAt  DateTime @default(now())
 
   @@map("systemStarted")
 }

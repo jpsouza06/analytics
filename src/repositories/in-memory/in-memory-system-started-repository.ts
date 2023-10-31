@@ -14,12 +14,20 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
          itemsQuery = itemsQuery.filter(item => item.estado === query.estado)
       )
 
+      query.cidade && (
+         itemsQuery = itemsQuery.filter(item => item.cidade === query.cidade)
+      )
+
       query.modulo && (
          itemsQuery = itemsQuery.filter(item => item.modulo === query.modulo)
       )
 
-      query.filial && (
-         itemsQuery = itemsQuery.filter(item => item.filial === query.filial)
+      query.codCliente && (
+         itemsQuery = itemsQuery.filter(item => item.codCliente === query.codCliente)
+      )
+
+      query.versao && (
+         itemsQuery = itemsQuery.filter(item => item.versao === query.versao)
       )
 
       query.dataInicio && (
@@ -55,12 +63,20 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
          itemsQuery = itemsQuery.filter(item => item.estado === query.estado)
       )
 
+      query.cidade && (
+         itemsQuery = itemsQuery.filter(item => item.cidade === query.cidade)
+      )
+
       query.modulo && (
          itemsQuery = itemsQuery.filter(item => item.modulo === query.modulo)
       )
 
-      query.filial && (
-         itemsQuery = itemsQuery.filter(item => item.filial === query.filial)
+      query.codCliente && (
+         itemsQuery = itemsQuery.filter(item => item.codCliente === query.codCliente)
+      )
+
+      query.versao && (
+         itemsQuery = itemsQuery.filter(item => item.versao === query.versao)
       )
 
       query.dataInicio && (
@@ -87,12 +103,20 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
          itemsQuery = itemsQuery.filter(item => item.estado === query.estado)
       )
 
+      query.cidade && (
+         itemsQuery = itemsQuery.filter(item => item.cidade === query.cidade)
+      )
+
       query.modulo && (
          itemsQuery = itemsQuery.filter(item => item.modulo === query.modulo)
       )
 
-      query.filial && (
-         itemsQuery = itemsQuery.filter(item => item.filial === query.filial)
+      query.codCliente && (
+         itemsQuery = itemsQuery.filter(item => item.codCliente === query.codCliente)
+      )
+
+      query.versao && (
+         itemsQuery = itemsQuery.filter(item => item.versao === query.versao)
       )
 
       query.dataInicio && (
@@ -121,11 +145,15 @@ export class InMemorySystemStartedRepository implements SystemStartedRepository 
       return systemStarted
    }
    async create(data: Prisma.SystemStartedUncheckedCreateInput) {
+      console.log(data)
       const systemStarted = {
          id: data.id ?? randomUUID(),
          estado: data.estado,
+         cidade: data.cidade,
          modulo: data.modulo,
-         filial: data.filial,
+         codCliente: data.codCliente,
+         versao: data.versao,
+
          createdAt: data.createdAt ? new Date(data.createdAt) : new Date()
       }
 

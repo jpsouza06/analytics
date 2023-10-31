@@ -15,8 +15,9 @@ describe('Find Pages View', () => {
 	it('should be able to find a page view by query', async () => {
 		const pageView = await prisma.pageView.create({
 			data: {
-				rotina: 'Rotina',
-				modulo: 'Modulo',
+				rotina: 'Teste',
+				modulo: 'Teste',
+				codCliente: '1',
 				createdAt: new Date('01-01-2022')
 			}
 		})

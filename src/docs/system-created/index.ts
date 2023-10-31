@@ -3,11 +3,13 @@ export const schemaCreate = {
    description: "Rota para criar um novo evento de System Started",
    body: {
       type: "object",
-      required: ["estado", "modulo", "filial"],
+      required: ["estado", "cidade", "modulo", "codCliente", "versao"],
       properties: {
          estado: { type: "string" },
+         cidade: { type: "string" },
          modulo: { type: "string" },
-         filial: { type: "string" }
+         codCliente: { type: "string" },
+         versao: { type: "string" }
       },
    },
    response: {
@@ -20,15 +22,19 @@ export const schemaCreate = {
                properties: {
                   id: { type: "string" },
                   estado: { type: "string" },
+                  cidade: { type: "string" },
                   modulo: { type: "string" },
-                  filial: { type: "string" },
+                  codCliente: { type: "string" },
+                  versao: { type: "string" },
                   createdAt: { type: "string", format: "date" }
                },
                example: {
                   "id": "040bb3dc-f7a8-49fa-9109-eb58bfbf9cbf",
                   "estado": "MG",
+                  "cidade": "Cidade",
                   "modulo": "Modulo",
-                  "filial": "Rotina",
+                  "codCliente": "1",
+                  "versao": "1",
                   "createdAt": "2023-10-20T18:09:31.485Z"
                }
             }
@@ -79,15 +85,19 @@ export const schemaGet = {
                properties: {
                   id: { type: "string" },
                   estado: { type: "string" },
+                  cidade: { type: "string" },
                   modulo: { type: "string" },
-                  filial: { type: "string" },
+                  codCliente: { type: "string" },
+                  versao: { type: "string" },
                   createdAt: { type: "string", format: "date" }
                },
                example: {
                   "id": "040bb3dc-f7a8-49fa-9109-eb58bfbf9cbf",
                   "estado": "MG",
+                  "cidade": "Cidade",
                   "modulo": "Modulo",
-                  "filial": "Rotina",
+                  "codCliente": "1",
+                  "versao": "1",
                   "createdAt": "2023-10-20T18:09:31.485Z"
                }
             }
@@ -138,8 +148,10 @@ export const schemaQuery = {
       type: "object",
       properties: {
          estado: { type: "string" },
+         cidade: { type: "string" },
          modulo: { type: "string" },
-         filial: { type: "string" },
+         codCliente: { type: "string" },
+         versao: { type: "string" },
          dataInicio: { type: "string", format: "date" },
          dataFim: { type: "string", format: "date" },
          orderBy: {
@@ -151,11 +163,19 @@ export const schemaQuery = {
                   type: "string",
                   enum: ["asc", "desc"]
                },
+               cidade: {
+                  type: "string",
+                  enum: ["asc", "desc"]
+               },
                modulo: {
                   type: "string",
                   enum: ["asc", "desc"]
                },
-               filial: {
+               codCliente: {
+                  type: "string",
+                  enum: ["asc", "desc"]
+               },
+               versao: {
                   type: "string",
                   enum: ["asc", "desc"]
                },
@@ -181,8 +201,10 @@ export const schemaQuery = {
                      properties: {
                         id: { type: "string" },
                         estado: { type: "string" },
+                        cidade: { type: "string" },
                         modulo: { type: "string" },
-                        filial: { type: "string" },
+                        codCliente: { type: "string" },
+                        versao: { type: "string" },
                         createdAt: { type: "string" }
                      }
                   }
@@ -191,8 +213,10 @@ export const schemaQuery = {
                   {
                      "id": "bee7ebef-e7d7-4324-856f-5834e2e4e84f",
                      "estado": "MG",
+                     "cidade": "Cidade",
                      "modulo": "Modulo",
-                     "filial": "Rotina",
+                     "codCliente": "1",
+                     "versao": "1",
                      "createdAt": "2023-10-20T18:21:29.900Z"
                   }
                ]
@@ -237,8 +261,10 @@ export const schemaCount = {
       type: "object",
       properties: {
          estado: { type: "string" },
+         cidade: { type: "string" },
          modulo: { type: "string" },
-         filial: { type: "string" },
+         codCliente: { type: "string" },
+         versao: { type: "string" },
          dataInicio: { type: "string", format: "date" },
          dataFim: { type: "string", format: "date" },
          orderBy: {
@@ -250,11 +276,19 @@ export const schemaCount = {
                   type: "string",
                   enum: ["asc", "desc"]
                },
+               cidade: {
+                  type: "string",
+                  enum: ["asc", "desc"]
+               },
                modulo: {
                   type: "string",
                   enum: ["asc", "desc"]
                },
-               filial: {
+               codCliente: {
+                  type: "string",
+                  enum: ["asc", "desc"]
+               },
+               versao: {
                   type: "string",
                   enum: ["asc", "desc"]
                },

@@ -15,7 +15,7 @@ interface CreateErrorUseCaseResponse {
 export class CreateErrorUseCase {
    constructor(
       private errorsRepository: ErrorsRepository
-   ) {}
+   ) { }
 
    async execute({
       unit,

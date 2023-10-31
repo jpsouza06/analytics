@@ -14,32 +14,40 @@ describe('Get Count System Started Use Case', () => {
    it('should be able to get system started count by query', async () => {
       await systemStartedRepository.create({
          estado: 'MG',
-         filial: 'filial',
-         modulo: 'modulo',
+         cidade: 'Cidade',
+         modulo: 'Modulo',
+         codCliente: '1',
+         versao: '1'
       })
 
       await systemStartedRepository.create({
          estado: 'MG',
-         filial: 'filial',
-         modulo: 'modulo',
+         cidade: 'Cidade',
+         modulo: 'Modulo',
+         codCliente: '1',
+         versao: '1'
       })
 
       await systemStartedRepository.create({
          estado: 'RJ',
-         filial: 'filial',
-         modulo: 'modulo',
+         cidade: 'Cidade',
+         modulo: 'Modulo',
+         codCliente: '1',
+         versao: '1'
       })
 
       await systemStartedRepository.create({
          estado: 'RJ',
-         filial: 'filial',
-         modulo: 'modulo1',
+         cidade: 'Cidade',
+         modulo: 'Modulo1',
+         codCliente: '1',
+         versao: '1'
       })
 
       const { score } = await sut.execute({
          query: {
             dataInicio: new Date('01-01-2000').toString(),
-            modulo: 'modulo'
+            modulo: 'Modulo'
          }
       })
 

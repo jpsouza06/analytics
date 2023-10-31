@@ -13,10 +13,11 @@ describe('Create Page View Use Case', () => {
 
 	it('should be able to create a page view', async () => {
 		const { pageView } = await sut.execute({
-         modulo: 'Modulo',
-         rotina: 'Rotina',
+			modulo: 'Modulo',
+			rotina: 'Rotina',
+			codCliente: '1'
 		})
-      
+
 		expect(pageView.id).toEqual(expect.any(String))
 	})
 })

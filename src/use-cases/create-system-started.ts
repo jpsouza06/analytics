@@ -3,8 +3,10 @@ import { SystemStarted } from "@prisma/client";
 
 interface CreateSystemStartedUseCaseRequest {
    estado: string;
+   cidade: string;
    modulo: string;
-   filial: string;
+   codCliente: string;
+   versao: string;
 }
 
 interface CreateSystemStartedUseCaseResponse {
@@ -18,13 +20,17 @@ export class CreateSystemStartedUseCase {
 
    async execute({
       estado,
+      cidade,
       modulo,
-      filial
+      codCliente,
+      versao
    }: CreateSystemStartedUseCaseRequest): Promise<CreateSystemStartedUseCaseResponse> {
       const systemStarted = await this.systemStartedRepository.create({
          estado,
+         cidade,
          modulo,
-         filial
+         codCliente,
+         versao
       })
 
       return {

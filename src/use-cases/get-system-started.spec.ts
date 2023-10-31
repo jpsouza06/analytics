@@ -1,7 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
-import { InMemoryErrorsRepository } from '@/repositories/in-memory/in-memory-errors-repository'
-import { GetErrorUseCase } from './get-error'
 import { GetSystemStartedUseCase } from './get-system-started'
 import { InMemorySystemStartedRepository } from '@/repositories/in-memory/in-memory-system-started-repository'
 
@@ -17,8 +15,10 @@ describe('Get System Started Use Case', () => {
 	it('should be able to get a system started by id', async () => {
 		const systemStartedCreated = await systemStartedRepository.create({
 			estado: 'MG',
+			cidade: 'Cidade',
 			modulo: 'Modulo',
-			filial: 'Conteudo'
+			codCliente: 'Conteudo',
+			versao: '1'
 		})
 
 		const { systemStarted } = await sut.execute({

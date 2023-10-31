@@ -18,8 +18,10 @@ describe('Get System Started', () => {
          data: {
             id: randomUUID(),
             estado: 'MG',
+            cidade: 'cidade',
             modulo: 'Modulo',
-            filial: 'Filial'
+            codCliente: '1',
+            versao: '1',
          }
       })
 

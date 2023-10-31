@@ -24,6 +24,7 @@
     "@fastify/swagger": "8.11.0",
     "@fastify/swagger-ui": "1.10.1",
     "@prisma/client": "^5.3.1",
+    "dayjs": "1.11.10",
     "dotenv": "^16.3.1",
     "fastify": "^4.23.2",
     "supertest": "^6.3.3",

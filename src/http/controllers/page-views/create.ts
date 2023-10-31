@@ -5,16 +5,18 @@ import { makeCreatePageViewUseCase } from "@/use-cases/factories/page-view/make-
 export async function Create(request: FastifyRequest, reply: FastifyReply) {
    const createPagesViewSchema = z.object({
       rotina: z.string(),
-      modulo: z.string()
+      modulo: z.string(),
+      codCliente: z.string()
    })
    try {
-      const { rotina, modulo } = createPagesViewSchema.parse(request.body)
+      const { rotina, modulo, codCliente } = createPagesViewSchema.parse(request.body)
 
       const createUseCase = makeCreatePageViewUseCase()
 
       const { pageView } = await createUseCase.execute({
          rotina,
          modulo,
+         codCliente,
       })
 
       return reply.status(201).send({
