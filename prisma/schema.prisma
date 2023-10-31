@@ -22,7 +22,7 @@ model PageView {
   id         String   @id @default(uuid())
   rotina     String
   modulo     String
-  codCliente String
+  codCliente String   @default("")
   createdAt  DateTime @default(now())
 
   @@map("pageViews")
@@ -40,10 +40,10 @@ model Event {
 model SystemStarted {
   id         String   @id @default(uuid())
   estado     String   @db.VarChar(2)
-  cidade     String
+  cidade     String   @default("")
   modulo     String
   codCliente String
-  versao     String
+  versao     String   @default("")
   createdAt  DateTime @default(now())
 
   @@map("systemStarted")
