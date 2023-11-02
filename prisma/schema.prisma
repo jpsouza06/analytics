@@ -9,10 +9,10 @@ datasource db {
 
 model Error {
   id        String   @id @default(uuid())
-  unit      String
-  rotina    String
-  modulo    String
-  conteudo  String
+  unit      String   @default("")
+  rotina    String   @default("")
+  modulo    String   @default("")
+  conteudo  String   @default("")
   createdAt DateTime @default(now())
 
   @@map("errors")
@@ -20,8 +20,8 @@ model Error {
 
 model PageView {
   id         String   @id @default(uuid())
-  rotina     String
-  modulo     String
+  rotina     String   @default("")
+  modulo     String   @default("")
   codCliente String   @default("")
   createdAt  DateTime @default(now())
 
@@ -30,8 +30,8 @@ model PageView {
 
 model Event {
   id        String   @id @default(uuid())
-  nome      String
-  conteudo  String
+  nome      String   @default("")
+  conteudo  String   @default("")
   createdAt DateTime @default(now())
 
   @@map("event")
@@ -39,10 +39,10 @@ model Event {
 
 model SystemStarted {
   id         String   @id @default(uuid())
-  estado     String   @db.VarChar(2)
+  estado     String   @default("") @db.VarChar(2)
   cidade     String   @default("")
-  modulo     String
-  codCliente String
+  modulo     String   @default("")
+  codCliente String   @default("")
   versao     String   @default("")
   createdAt  DateTime @default(now())
 
