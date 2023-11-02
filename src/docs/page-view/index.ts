@@ -3,14 +3,15 @@ export const schemaCreate = {
    description: "Rota para criar um novo evento de Page View",
    body: {
       type: "object",
-      required: ["rotina", "modulo"],
+      required: ["rotina", "modulo", "codCliente"],
       properties: {
          rotina: { type: "string" },
          modulo: { type: "string" },
+         codCliente: { type: "string" },
       },
    },
    response: {
-      200: {
+      201: {
          description: 'Sucesso',
          type: "object",
          properties: {
@@ -20,12 +21,14 @@ export const schemaCreate = {
                   id: { type: "string" },
                   rotina: { type: "string" },
                   modulo: { type: "string" },
+                  codCliente: { type: "string" },
                   createdAt: { type: "string", }
                },
                example: {
                   "id": "267915cb-921f-4356-872f-203f42d973b8",
                   "rotina": "Rotina",
                   "modulo": "Modulo",
+                  "codCliente": "1",
                   "createdAt": "2023-10-17T00:48:08.507Z"
                }
             }
@@ -77,12 +80,14 @@ export const schemaGet = {
                   id: { type: "string" },
                   rotina: { type: "string" },
                   modulo: { type: "string" },
+                  codCliente: { type: "string" },
                   createdAt: { type: "string", }
                },
                example: {
                   "id": "267915cb-921f-4356-872f-203f42d973b8",
                   "rotina": "Rotina",
                   "modulo": "Modulo",
+                  "codCliente": "1",
                   "createdAt": "2023-10-17T00:48:08.507Z"
                }
             }
@@ -134,6 +139,7 @@ export const schemaQuery = {
       properties: {
          rotina: { type: "string" },
          modulo: { type: "string" },
+         codCliente: { type: "string" },
          dataInicio: { type: "string", format: "date" },
          dataFim: { type: "string", format: "date" },
          orderBy: {
@@ -146,6 +152,10 @@ export const schemaQuery = {
                   enum: ["asc", "desc"]
                },
                modulo: {
+                  type: "string",
+                  enum: ["asc", "desc"]
+               },
+               codCliente: {
                   type: "string",
                   enum: ["asc", "desc"]
                },
@@ -172,6 +182,7 @@ export const schemaQuery = {
                         id: { type: "string" },
                         rotina: { type: "string" },
                         modulo: { type: "string" },
+                        codCliente: { type: "string" },
                         createdAt: { type: "string" }
                      }
                   }
@@ -181,6 +192,7 @@ export const schemaQuery = {
                      "id": "267915cb-921f-4356-872f-203f42d973b8",
                      "rotina": "Rotina",
                      "modulo": "Modulo",
+                     "codCliente": "1",
                      "createdAt": "2023-10-17T00:48:08.507Z"
                   }
                ]

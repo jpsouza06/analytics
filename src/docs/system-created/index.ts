@@ -13,7 +13,7 @@ export const schemaCreate = {
       },
    },
    response: {
-      200: {
+      201: {
          description: 'Sucesso',
          type: "object",
          properties: {

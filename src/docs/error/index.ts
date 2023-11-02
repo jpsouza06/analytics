@@ -12,7 +12,7 @@ export const schemaCreate = {
       },
    },
    response: {
-      200: {
+      201: {
          description: 'Sucesso',
          type: "object",
          properties: {
@@ -42,17 +42,8 @@ export const schemaCreate = {
          type: 'object',
          properties: {
             message: {
-               type: 'object',
-               example: [
-                  {
-                     "validation": "uuid",
-                     "code": "invalid_string",
-                     "message": "Invalid uuid",
-                     "path": [
-                        "errorId"
-                     ]
-                  }
-               ]
+               type: 'string',
+               example: "Requisição incorreta"
             }
          }
       },
@@ -60,7 +51,10 @@ export const schemaCreate = {
          description: 'Erro interno do servidor',
          type: 'object',
          properties: {
-            message: { type: 'string' }
+            message: {
+               type: 'string',
+               example: "Erro interno do servidor"
+            }
          }
       },
    },
@@ -108,17 +102,8 @@ export const schemaGet = {
          type: 'object',
          properties: {
             message: {
-               type: 'object',
-               example: [
-                  {
-                     "validation": "uuid",
-                     "code": "invalid_string",
-                     "message": "Invalid uuid",
-                     "path": [
-                        "errorId"
-                     ]
-                  }
-               ]
+               type: 'string',
+               example: "params/errorId must match format \"uuid\""
             }
          }
       },
@@ -133,7 +118,10 @@ export const schemaGet = {
          description: 'Erro interno do servidor',
          type: 'object',
          properties: {
-            message: { type: 'string' }
+            message: {
+               type: 'string',
+               example: "Erro interno do servidor"
+            }
          }
       },
    },
@@ -228,17 +216,8 @@ export const schemaQuery = {
          type: 'object',
          properties: {
             message: {
-               type: 'object',
-               example: [
-                  {
-                     "validation": "uuid",
-                     "code": "invalid_string",
-                     "message": "Invalid uuid",
-                     "path": [
-                        "errorId"
-                     ]
-                  }
-               ]
+               type: 'string',
+               example: "Requisição incorreta"
             }
          }
       },
@@ -246,7 +225,10 @@ export const schemaQuery = {
          description: 'Erro interno do servidor',
          type: 'object',
          properties: {
-            message: { type: 'string' }
+            message: {
+               type: 'string',
+               example: "Erro interno do servidor"
+            }
          }
       },
    },
