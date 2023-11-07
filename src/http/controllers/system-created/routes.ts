@@ -3,7 +3,7 @@ import { Count } from "./count";
 import { Create } from "./create";
 import { Get } from "./get";
 import { Query } from "./query";
-import { schemaCount, schemaCreate, schemaGet, schemaQuery } from "@/docs/system-created";
+import { schemaCount, schemaCreate, schemaGet, schemaQuery } from "@/docs/system-started";
 
 export async function systemStartedRoutes(app: FastifyInstance) {
    app.post('/system-started', {

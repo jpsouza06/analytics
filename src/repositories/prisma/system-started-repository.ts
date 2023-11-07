@@ -92,6 +92,7 @@ export class PrismaSystemStartedRepository implements SystemStartedRepository {
          total
       }
    }
+
    async countByQuery(query: countSystemStartedQuery) {
       const count = await prisma.systemStarted.count({
          where: {

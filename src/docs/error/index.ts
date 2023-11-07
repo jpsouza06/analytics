@@ -145,8 +145,8 @@ export const schemaQuery = {
          rotina: { type: "string" },
          modulo: { type: "string" },
          conteudo: { type: "string" },
-         dataInicio: { type: "string", format: "date" },
-         dataFim: { type: "string", format: "date" },
+         dataInicio: { type: "string", format: "date-time" },
+         dataFim: { type: "string", format: "date-time" },
          orderBy: {
             type: "object",
             description:

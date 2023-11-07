@@ -26,7 +26,7 @@ export const schemaCreate = {
                   modulo: { type: "string" },
                   codCliente: { type: "string" },
                   versao: { type: "string" },
-                  createdAt: { type: "string", format: "date" }
+                  createdAt: { type: "string", format: "date-time" }
                },
                example: {
                   "id": "040bb3dc-f7a8-49fa-9109-eb58bfbf9cbf",
@@ -89,7 +89,7 @@ export const schemaGet = {
                   modulo: { type: "string" },
                   codCliente: { type: "string" },
                   versao: { type: "string" },
-                  createdAt: { type: "string", format: "date" }
+                  createdAt: { type: "string", format: "date-time" }
                },
                example: {
                   "id": "040bb3dc-f7a8-49fa-9109-eb58bfbf9cbf",
@@ -152,8 +152,8 @@ export const schemaQuery = {
          modulo: { type: "string" },
          codCliente: { type: "string" },
          versao: { type: "string" },
-         dataInicio: { type: "string", format: "date" },
-         dataFim: { type: "string", format: "date" },
+         dataInicio: { type: "string", format: "date-time" },
+         dataFim: { type: "string", format: "date-time" },
          orderBy: {
             type: "object",
             description:
@@ -265,8 +265,8 @@ export const schemaCount = {
          modulo: { type: "string" },
          codCliente: { type: "string" },
          versao: { type: "string" },
-         dataInicio: { type: "string", format: "date" },
-         dataFim: { type: "string", format: "date" },
+         dataInicio: { type: "string", format: "date-time" },
+         dataFim: { type: "string", format: "date-time" },
          orderBy: {
             type: "object",
             description:
