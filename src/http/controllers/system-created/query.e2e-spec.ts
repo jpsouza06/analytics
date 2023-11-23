@@ -28,7 +28,7 @@ describe('Find System Started', () => {
          .post('/system-started/query/1')
          .send({
             rotina: 'Rotina',
-            dataInicio: '2020-01-01'
+            dataInicio: '2020-01-01T00:00:00'
          })
 
       expect(response.statusCode).toEqual(200)

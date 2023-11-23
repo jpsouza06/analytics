@@ -13,7 +13,7 @@ describe('Find Errors', () => {
 	})
 
 	it('should be able to find a error by query', async () => {
-		const error = await prisma.error.create({
+		await prisma.error.create({
 			data: {
 				unit: 'Unit',
 				rotina: 'Rotina',
@@ -27,7 +27,7 @@ describe('Find Errors', () => {
 			.post('/error/query/1')
 			.send({
 				unit: 'Unit',
-				dataInicio: '2020-01-01'
+				dataInicio: '2020-01-01T00:00:00'
 			})
 
 		expect(response.statusCode).toEqual(200)

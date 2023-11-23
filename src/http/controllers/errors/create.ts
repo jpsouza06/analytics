@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { makeCreateErrorUseCase } from "@/use-cases/factories/error/make-create-error-use-case";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 
 export async function Create(request: FastifyRequest, reply: FastifyReply) {
    const createErrorBodySchema = z.object({
@@ -16,16 +15,15 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
 
       const createUseCase = makeCreateErrorUseCase()
 
-      const { error } = await createUseCase.execute({
+      await createUseCase.execute({
          unit,
          rotina,
          modulo,
          conteudo
       })
 
-      return reply.status(201).send({
-         error,
-      })
+      return reply.status(201).send()
+
    } catch (error) {
       if (error instanceof z.ZodError) {
          console.log({ message: error.issues })

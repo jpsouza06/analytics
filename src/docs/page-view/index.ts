@@ -15,22 +15,9 @@ export const schemaCreate = {
          description: 'Sucesso',
          type: "object",
          properties: {
-            pageView: {
-               type: 'object',
-               properties: {
-                  id: { type: "string" },
-                  rotina: { type: "string" },
-                  modulo: { type: "string" },
-                  codCliente: { type: "string" },
-                  createdAt: { type: "string", }
-               },
-               example: {
-                  "id": "267915cb-921f-4356-872f-203f42d973b8",
-                  "rotina": "Rotina",
-                  "modulo": "Modulo",
-                  "codCliente": "1",
-                  "createdAt": "2023-10-17T00:48:08.507Z"
-               }
+            message: {
+               type: 'string',
+               example: "Sucesso"
             }
          },
       },

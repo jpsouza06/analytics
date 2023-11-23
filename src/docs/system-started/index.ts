@@ -17,26 +17,9 @@ export const schemaCreate = {
          description: 'Sucesso',
          type: "object",
          properties: {
-            systemStarted: {
-               type: 'object',
-               properties: {
-                  id: { type: "string" },
-                  estado: { type: "string" },
-                  cidade: { type: "string" },
-                  modulo: { type: "string" },
-                  codCliente: { type: "string" },
-                  versao: { type: "string" },
-                  createdAt: { type: "string", format: "date-time" }
-               },
-               example: {
-                  "id": "040bb3dc-f7a8-49fa-9109-eb58bfbf9cbf",
-                  "estado": "MG",
-                  "cidade": "Cidade",
-                  "modulo": "Modulo",
-                  "codCliente": "1",
-                  "versao": "1",
-                  "createdAt": "2023-10-20T18:09:31.485Z"
-               }
+            message: {
+               type: 'string',
+               example: "Sucesso"
             }
          },
       },

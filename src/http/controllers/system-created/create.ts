@@ -21,7 +21,7 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
 
       const createUseCase = makeCreateSystemStartedUseCase()
 
-      const { systemStarted } = await createUseCase.execute({
+      await createUseCase.execute({
          estado,
          cidade,
          modulo,
@@ -29,9 +29,7 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
          versao,
       })
 
-      return reply.status(201).send({
-         systemStarted,
-      })
+      return reply.status(201).send()
 
    } catch (error) {
       if (error instanceof z.ZodError) {

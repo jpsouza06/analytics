@@ -13,15 +13,13 @@ export async function Create(request: FastifyRequest, reply: FastifyReply) {
 
       const createUseCase = makeCreatePageViewUseCase()
 
-      const { pageView } = await createUseCase.execute({
+      await createUseCase.execute({
          rotina,
          modulo,
          codCliente,
       })
 
-      return reply.status(201).send({
-         pageView,
-      })
+      return reply.status(201).send()
 
    } catch (error) {
       if (error instanceof z.ZodError) {
